@@ -1,0 +1,50 @@
+import clr
+import os
+clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
+from UnderAutomation.Staubli.Soap.Errors import StartApplicationError as start_application_error
+
+class StartApplicationError(int):
+	MemoryFull = start_application_error.MemoryFull
+	LibraryBusy = start_application_error.LibraryBusy
+	LibraryInvalidZip = start_application_error.LibraryInvalidZip
+	DataNotFound = start_application_error.DataNotFound
+	DataBusy = start_application_error.DataBusy
+	DataInvalidName = start_application_error.DataInvalidName
+	DataAlreadyExists = start_application_error.DataAlreadyExists
+	DataInvalidSize = start_application_error.DataInvalidSize
+	DataNotAnArray = start_application_error.DataNotAnArray
+	RoutineInvalidName = start_application_error.RoutineInvalidName
+	RoutineAlreadyExists = start_application_error.RoutineAlreadyExists
+	RoutineNameTooLong = start_application_error.RoutineNameTooLong
+	RoutineInvalidParamPosition = start_application_error.RoutineInvalidParamPosition
+	RoutineNotFound = start_application_error.RoutineNotFound
+	RoutineBusy = start_application_error.RoutineBusy
+	ProjectBusy = start_application_error.ProjectBusy
+	ProjectInvalidName = start_application_error.ProjectInvalidName
+	ProjectInvalidAlias = start_application_error.ProjectInvalidAlias
+	ProjectAliasAlreadyUsed = start_application_error.ProjectAliasAlreadyUsed
+	ProjectAlreadyExists = start_application_error.ProjectAlreadyExists
+	ProjectCodeError = start_application_error.ProjectCodeError
+	ProjectDataError = start_application_error.ProjectDataError
+	StartRoutineNotFound = start_application_error.StartRoutineNotFound
+	ProjectInvalidMain = start_application_error.ProjectInvalidMain
+	ProjectInvalidProject = start_application_error.ProjectInvalidProject
+	StopRoutineNotFound = start_application_error.StopRoutineNotFound
+	ProjectInvalidDestructor = start_application_error.ProjectInvalidDestructor
+	ProjectDefaultStackTooSmall = start_application_error.ProjectDefaultStackTooSmall
+	ProjectAlreadyRunning = start_application_error.ProjectAlreadyRunning
+	ProjectAlreadyEnding = start_application_error.ProjectAlreadyEnding
+	ProjectLocked = start_application_error.ProjectLocked
+	ProjectFileError = start_application_error.ProjectFileError
+	ProjectFilemanagerNotFound = start_application_error.ProjectFilemanagerNotFound
+	ProjectLibraryError = start_application_error.ProjectLibraryError
+	ProjectUnresolvedSymbol = start_application_error.ProjectUnresolvedSymbol
+	ProjectInconsistantResolvedSymbol = start_application_error.ProjectInconsistantResolvedSymbol
+	ProjectInterfaceStillUsed = start_application_error.ProjectInterfaceStillUsed
+	ProjectUsedAsStruct = start_application_error.ProjectUsedAsStruct
+	ProjectInterfaceTaskNotKilled = start_application_error.ProjectInterfaceTaskNotKilled
+	ProjectInvalidTypename = start_application_error.ProjectInvalidTypename
+	ProjectTypenameAlreadyUsed = start_application_error.ProjectTypenameAlreadyUsed
+	ProjectTypeProjectError = start_application_error.ProjectTypeProjectError
+	ProjectTypeBusy = start_application_error.ProjectTypeBusy
+	ProjectCircularReference = start_application_error.ProjectCircularReference
