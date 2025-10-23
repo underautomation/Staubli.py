@@ -1,4 +1,5 @@
 import typing
+from underautomation.staubli.soap.data.i_forward_kinematics import IForwardKinematics
 from underautomation.staubli.soap.data.frame import Frame
 from underautomation.staubli.soap.data.config import Config
 import clr
@@ -6,7 +7,7 @@ import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
 from UnderAutomation.Staubli.Soap.Internal.V3 import ForwardKinResponse as forward_kin_response
 
-class ForwardKinResponse:
+class ForwardKinResponse(IForwardKinematics):
 	def __init__(self, position: Frame, config: Config, _internal = 0):
 		if(_internal == 0):
 			self._instance = forward_kin_response(position, config)
