@@ -216,7 +216,7 @@ You're welcome to:
 
 ## 📬 Need Help?
 
-- 📚 [Documentation](https://underautomation.com/Staubli/documentation)
+- 📚 [Documentation](https://underautomation.com/staubli/documentation)
 - 📩 [Contact Support](https://underautomation.com/contact)
 
 ---
