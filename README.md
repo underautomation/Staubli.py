@@ -189,7 +189,7 @@ controller.soap.task_kill(tasks[0].name, tasks[0].created_by)
 ## 📜 License
 
 **⚠️ Commercial license required**  
-🔗 [View EULA](https://underautomation.com/Staubli/eula)
+🔗 [View EULA](https://underautomation.com/staubli/eula)
 
 Register your license at runtime with:
 
