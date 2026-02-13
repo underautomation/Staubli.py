@@ -9,7 +9,7 @@
 
 ### 🤖 Effortlessly Communicate with Staubli Robots from Python
 
-The **Staubli Communication SDK for Python** wraps the native Staubli SOAP stack and exposes a clean, Pythonic API for automation engineers, researchers, and integrators. Use it to supervise industrial robots, orchestrate motion, exchange I/O, and manage VAL3 applications—all without requiring additional Staubli software licenses.
+The **Staubli Communication SDK for Python** wraps the native Staubli SOAP stack and exposes a clean, Pythonic API for automation engineers, researchers, and integrators. Use it to supervise industrial robots, orchestrate motion, exchange I/O, and manage VAL3 applications-all without requiring additional Staubli software licenses.
 
 🔗 **More Information:** [Documentation](https://underautomation.com/Staubli/documentation/get-started-python)  
 🔗 Available also for **[🟣 .NET](https://github.com/underautomation/Staubli.NET)** & **[🟨 LabVIEW](https://github.com/underautomation/Staubli.vi)**
