@@ -7,6 +7,10 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
 from UnderAutomation.Staubli.Soap.Data import Robot as robot
+from UnderAutomation.Staubli.Soap.Data import Kinematic as kinematic
+from UnderAutomation.Staubli.Soap.Data import MountType as mount_type
+from UnderAutomation.Staubli.Soap.Data import LengthAxis3 as length_axis3
+from UnderAutomation.Staubli.Soap.Data import DiameterAxis3 as diameter_axis3
 
 class Robot:
 	def __init__(self, _internal = 0):
@@ -19,7 +23,7 @@ class Robot:
 		return Kinematic(self._instance.Kinematic)
 	@kinematic.setter
 	def kinematic(self, value: Kinematic):
-		self._instance.Kinematic = value
+		self._instance.Kinematic = kinematic(int(value))
 	@property
 	def arm(self) -> str:
 		return self._instance.Arm
@@ -37,16 +41,16 @@ class Robot:
 		return MountType(self._instance.MountType)
 	@mount_type.setter
 	def mount_type(self, value: MountType):
-		self._instance.MountType = value
+		self._instance.MountType = mount_type(int(value))
 	@property
 	def length_axis3(self) -> LengthAxis3:
 		return LengthAxis3(self._instance.LengthAxis3)
 	@length_axis3.setter
 	def length_axis3(self, value: LengthAxis3):
-		self._instance.LengthAxis3 = value
+		self._instance.LengthAxis3 = length_axis3(int(value))
 	@property
 	def diameter_axis3(self) -> DiameterAxis3:
 		return DiameterAxis3(self._instance.DiameterAxis3)
 	@diameter_axis3.setter
 	def diameter_axis3(self, value: DiameterAxis3):
-		self._instance.DiameterAxis3 = value
+		self._instance.DiameterAxis3 = diameter_axis3(int(value))

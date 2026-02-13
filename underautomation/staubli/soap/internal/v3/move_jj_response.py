@@ -5,6 +5,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
 from UnderAutomation.Staubli.Soap.Internal.V3 import MoveJJResponse as move_jj_response
+from UnderAutomation.Staubli.Soap.Data import MotionReturnCode as motion_return_code
 
 class MoveJJResponse(IMoveResult):
 	def __init__(self, id: int, motRet: MotionReturnCode, _internal = 0):
@@ -12,6 +13,8 @@ class MoveJJResponse(IMoveResult):
 			self._instance = move_jj_response(id, motRet)
 		else:
 			self._instance = _internal
+	def __repr__(self):
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def id(self) -> int:
 		return self._instance.Id
@@ -23,4 +26,4 @@ class MoveJJResponse(IMoveResult):
 		return MotionReturnCode(self._instance.ReturnCode)
 	@return_code.setter
 	def return_code(self, value: MotionReturnCode):
-		self._instance.ReturnCode = value
+		self._instance.ReturnCode = motion_return_code(int(value))

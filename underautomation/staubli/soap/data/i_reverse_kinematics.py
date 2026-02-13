@@ -4,6 +4,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
 from UnderAutomation.Staubli.Soap.Data import IReverseKinematics as i_reverse_kinematics
+from UnderAutomation.Staubli.Soap.Data import ReversingResult as reversing_result
 
 class IReverseKinematics:
 	def __init__(self, _internal = 0):

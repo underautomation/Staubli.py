@@ -22,8 +22,9 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
 from UnderAutomation.Staubli.Soap.Internal import SoapClientBase as soap_client_base
+from UnderAutomation.Staubli.Soap.Data import MotionReturnCode as motion_return_code
+from UnderAutomation.Staubli.Soap.Data import PowerReturnCode as power_return_code
 
-T = typing.TypeVar('T')
 class SoapClientBase:
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
@@ -35,7 +36,7 @@ class SoapClientBase:
 	def get_robots(self) -> typing.List[Robot]:
 		return [Robot(x) for x in self._instance.GetRobots()]
 	def get_current_cartesian_joint_position(self, robot: int=0, tool: CartesianPosition=None, frame: CartesianPosition=None) -> CartesianJointPosition:
-		return CartesianJointPosition(self._instance.GetCurrentCartesianJointPosition(robot, tool._instance, frame._instance))
+		return CartesianJointPosition(self._instance.GetCurrentCartesianJointPosition(robot, tool._instance if tool else None, frame._instance if frame else None))
 	def get_current_joint_position(self, robot: int=0) -> typing.List[float]:
 		return self._instance.GetCurrentJointPosition(robot)
 	def get_controller_parameters(self) -> typing.List[Parameter]:
@@ -71,15 +72,15 @@ class SoapClientBase:
 	def forward_kinematics(self, robot: int, joints: typing.List[float]) -> IForwardKinematics:
 		return IForwardKinematics(self._instance.ForwardKinematics(robot, joints))
 	def reverse_kinematics(self, robot: int, joint: typing.List[float], target: Frame, config: Config, jointRange: JointRange) -> IReverseKinematics:
-		return IReverseKinematics(self._instance.ReverseKinematics(robot, joint, target._instance, config._instance, jointRange._instance))
+		return IReverseKinematics(self._instance.ReverseKinematics(robot, joint, target._instance if target else None, config._instance if config else None, jointRange._instance if jointRange else None))
 	def move_c(self, robot: int, frameB: Frame, frameC: Frame, mdesc: MotionDesc) -> IMoveResult:
-		return IMoveResult(self._instance.MoveC(robot, frameB._instance, frameC._instance, mdesc._instance))
+		return IMoveResult(self._instance.MoveC(robot, frameB._instance if frameB else None, frameC._instance if frameC else None, mdesc._instance if mdesc else None))
 	def move_jc(self, robot: int, frame: Frame, mdesc: MotionDesc) -> IMoveResult:
-		return IMoveResult(self._instance.MoveJC(robot, frame._instance, mdesc._instance))
+		return IMoveResult(self._instance.MoveJC(robot, frame._instance if frame else None, mdesc._instance if mdesc else None))
 	def move_jj(self, robot: int, joints: typing.List[float], mdesc: MotionDesc) -> IMoveResult:
-		return IMoveResult(self._instance.MoveJJ(robot, joints, mdesc._instance))
+		return IMoveResult(self._instance.MoveJJ(robot, joints, mdesc._instance if mdesc else None))
 	def move_l(self, robot: int, frame: Frame, mdesc: MotionDesc) -> IMoveResult:
-		return IMoveResult(self._instance.MoveL(robot, frame._instance, mdesc._instance))
+		return IMoveResult(self._instance.MoveL(robot, frame._instance if frame else None, mdesc._instance if mdesc else None))
 	def reset_motion(self) -> MotionReturnCode:
 		return MotionReturnCode(self._instance.ResetMotion())
 	def restart_motion(self) -> MotionReturnCode:

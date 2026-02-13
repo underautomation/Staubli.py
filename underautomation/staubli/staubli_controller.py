@@ -14,7 +14,7 @@ class StaubliController:
 		else:
 			self._instance = _internal
 	def connect(self, parameters: ConnectionParameters) -> None:
-		self._instance.Connect(parameters._instance)
+		self._instance.Connect(parameters._instance if parameters else None)
 	def disconnect(self) -> None:
 		self._instance.Disconnect()
 	@staticmethod

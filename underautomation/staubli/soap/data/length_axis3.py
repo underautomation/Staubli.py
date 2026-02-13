@@ -4,8 +4,14 @@ clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", 
 from UnderAutomation.Staubli.Soap.Data import LengthAxis3 as length_axis3
 
 class LengthAxis3(int):
-	Invalid = length_axis3.Invalid
-	L100 = length_axis3.L100
-	L200 = length_axis3.L200
-	L400 = length_axis3.L400
-	L600 = length_axis3.L600
+	Invalid = int(length_axis3.Invalid)
+	L100 = int(length_axis3.L100)
+	L200 = int(length_axis3.L200)
+	L400 = int(length_axis3.L400)
+	L600 = int(length_axis3.L600)
+
+	def __repr__(self):
+		for name, value in vars(LengthAxis3).items():
+			if not name.startswith('_') and isinstance(value, int) and value == self:
+				return name
+		return str(int(self))

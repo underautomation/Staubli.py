@@ -17,9 +17,5 @@ class SoapConnectParameters(SoapConnectParametersBase):
 	@enable.setter
 	def enable(self, value: bool):
 		self._instance.Enable = value
-	@property
-	def defaul_t__port(self) -> int:
-		return self._instance.DEFAULT_PORT
-	@defaul_t__port.setter
-	def defaul_t__port(self, value: int):
-		self._instance.DEFAULT_PORT = value
+
+SoapConnectParameters.defaul_t__port = SoapConnectParameters(soap_connect_parameters.DEFAULT_PORT)

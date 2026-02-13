@@ -4,7 +4,13 @@ clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", 
 from UnderAutomation.Staubli.Soap.Data import AboveBelowConfig as above_below_config
 
 class AboveBelowConfig(int):
-	Same = above_below_config.Same
-	Above = above_below_config.Above
-	Below = above_below_config.Below
-	Free = above_below_config.Free
+	Same = int(above_below_config.Same)
+	Above = int(above_below_config.Above)
+	Below = int(above_below_config.Below)
+	Free = int(above_below_config.Free)
+
+	def __repr__(self):
+		for name, value in vars(AboveBelowConfig).items():
+			if not name.startswith('_') and isinstance(value, int) and value == self:
+				return name
+		return str(int(self))

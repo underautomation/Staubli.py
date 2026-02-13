@@ -5,6 +5,8 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
 from UnderAutomation.Staubli.Soap.Data import VrbxConfig as vrbx_config
+from UnderAutomation.Staubli.Soap.Data import AboveBelowConfig as above_below_config
+from UnderAutomation.Staubli.Soap.Data import PositiveNegativeConfig as positive_negative_config
 
 class VrbxConfig:
 	def __init__(self, _internal = 0):
@@ -12,21 +14,23 @@ class VrbxConfig:
 			self._instance = vrbx_config()
 		else:
 			self._instance = _internal
+	def __repr__(self):
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def joint1(self) -> AboveBelowConfig:
 		return AboveBelowConfig(self._instance.Joint1)
 	@joint1.setter
 	def joint1(self, value: AboveBelowConfig):
-		self._instance.Joint1 = value
+		self._instance.Joint1 = above_below_config(int(value))
 	@property
 	def joint3(self) -> PositiveNegativeConfig:
 		return PositiveNegativeConfig(self._instance.Joint3)
 	@joint3.setter
 	def joint3(self, value: PositiveNegativeConfig):
-		self._instance.Joint3 = value
+		self._instance.Joint3 = positive_negative_config(int(value))
 	@property
 	def joint5(self) -> PositiveNegativeConfig:
 		return PositiveNegativeConfig(self._instance.Joint5)
 	@joint5.setter
 	def joint5(self, value: PositiveNegativeConfig):
-		self._instance.Joint5 = value
+		self._instance.Joint5 = positive_negative_config(int(value))

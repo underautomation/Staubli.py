@@ -13,6 +13,8 @@ class ForwardKinResponse(IForwardKinematics):
 			self._instance = forward_kin_response(position, config)
 		else:
 			self._instance = _internal
+	def __repr__(self):
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def position(self) -> Frame:
 		return Frame(self._instance.Position)

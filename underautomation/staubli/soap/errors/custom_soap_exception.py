@@ -4,6 +4,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
 from UnderAutomation.Staubli.Soap.Errors import CustomSoapException as custom_soap_exception
+from UnderAutomation.Staubli.Soap.Errors import SoapErrorCode as soap_error_code
 
 class CustomSoapException:
 	def __init__(self, _internal = 0):

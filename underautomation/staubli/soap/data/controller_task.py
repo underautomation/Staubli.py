@@ -5,6 +5,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
 from UnderAutomation.Staubli.Soap.Data import ControllerTask as controller_task
+from UnderAutomation.Staubli.Soap.Data import ControllerTaskState as controller_task_state
 
 class ControllerTask:
 	def __init__(self, _internal = 0):
@@ -23,7 +24,7 @@ class ControllerTask:
 		return ControllerTaskState(self._instance.State)
 	@state.setter
 	def state(self, value: ControllerTaskState):
-		self._instance.State = value
+		self._instance.State = controller_task_state(int(value))
 	@property
 	def priority(self) -> int:
 		return self._instance.Priority

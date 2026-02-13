@@ -4,25 +4,31 @@ clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", 
 from UnderAutomation.Staubli.Soap.Errors import SoapErrorCode as soap_error_code
 
 class SoapErrorCode(int):
-	Unknown = soap_error_code.Unknown
-	InvalidCredentials = soap_error_code.InvalidCredentials
-	TaskNotFound = soap_error_code.TaskNotFound
-	MismatchedCode = soap_error_code.MismatchedCode
-	ProgramNotFound = soap_error_code.ProgramNotFound
-	TaskAlreadyLocked = soap_error_code.TaskAlreadyLocked
-	SinReturnCodeNok = soap_error_code.SinReturnCodeNok
-	SchedulingModeError = soap_error_code.SchedulingModeError
-	ApplicationNotFound = soap_error_code.ApplicationNotFound
-	StackFrameNotFound = soap_error_code.StackFrameNotFound
-	ProgramLineNotFound = soap_error_code.ProgramLineNotFound
-	ReadAccessErrorCode = soap_error_code.ReadAccessErrorCode
-	SetPosNotSimulCode = soap_error_code.SetPosNotSimulCode
-	InvalidSessionIdCode = soap_error_code.InvalidSessionIdCode
-	WriteAccessErrorCode = soap_error_code.WriteAccessErrorCode
-	CannotStartApplication = soap_error_code.CannotStartApplication
-	ClientAlreadyConnected = soap_error_code.ClientAlreadyConnected
-	IoWriteAccessErrorCode = soap_error_code.IoWriteAccessErrorCode
-	ClientCommunicationError = soap_error_code.ClientCommunicationError
-	IoWriteAccessErrorValidation = soap_error_code.IoWriteAccessErrorValidation
-	IoWriteAccessErrorWorkingMode = soap_error_code.IoWriteAccessErrorWorkingMode
-	InvalidRobotIdCode = soap_error_code.InvalidRobotIdCode
+	Unknown = int(soap_error_code.Unknown)
+	InvalidCredentials = int(soap_error_code.InvalidCredentials)
+	TaskNotFound = int(soap_error_code.TaskNotFound)
+	MismatchedCode = int(soap_error_code.MismatchedCode)
+	ProgramNotFound = int(soap_error_code.ProgramNotFound)
+	TaskAlreadyLocked = int(soap_error_code.TaskAlreadyLocked)
+	SinReturnCodeNok = int(soap_error_code.SinReturnCodeNok)
+	SchedulingModeError = int(soap_error_code.SchedulingModeError)
+	ApplicationNotFound = int(soap_error_code.ApplicationNotFound)
+	StackFrameNotFound = int(soap_error_code.StackFrameNotFound)
+	ProgramLineNotFound = int(soap_error_code.ProgramLineNotFound)
+	ReadAccessErrorCode = int(soap_error_code.ReadAccessErrorCode)
+	SetPosNotSimulCode = int(soap_error_code.SetPosNotSimulCode)
+	InvalidSessionIdCode = int(soap_error_code.InvalidSessionIdCode)
+	WriteAccessErrorCode = int(soap_error_code.WriteAccessErrorCode)
+	CannotStartApplication = int(soap_error_code.CannotStartApplication)
+	ClientAlreadyConnected = int(soap_error_code.ClientAlreadyConnected)
+	IoWriteAccessErrorCode = int(soap_error_code.IoWriteAccessErrorCode)
+	ClientCommunicationError = int(soap_error_code.ClientCommunicationError)
+	IoWriteAccessErrorValidation = int(soap_error_code.IoWriteAccessErrorValidation)
+	IoWriteAccessErrorWorkingMode = int(soap_error_code.IoWriteAccessErrorWorkingMode)
+	InvalidRobotIdCode = int(soap_error_code.InvalidRobotIdCode)
+
+	def __repr__(self):
+		for name, value in vars(SoapErrorCode).items():
+			if not name.startswith('_') and isinstance(value, int) and value == self:
+				return name
+		return str(int(self))

@@ -5,6 +5,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
 from UnderAutomation.Staubli.Soap.Data import PhysicalIoState as physical_io_state
+from UnderAutomation.Staubli.Soap.Data import PhysicalIoEnumState as physical_io_enum_state
 
 class PhysicalIoState:
 	def __init__(self, _internal = 0):
@@ -17,7 +18,7 @@ class PhysicalIoState:
 		return PhysicalIoEnumState(self._instance.State)
 	@state.setter
 	def state(self, value: PhysicalIoEnumState):
-		self._instance.State = value
+		self._instance.State = physical_io_enum_state(int(value))
 	@property
 	def locked(self) -> bool:
 		return self._instance.Locked

@@ -4,47 +4,53 @@ clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", 
 from UnderAutomation.Staubli.Soap.Errors import StartApplicationError as start_application_error
 
 class StartApplicationError(int):
-	MemoryFull = start_application_error.MemoryFull
-	LibraryBusy = start_application_error.LibraryBusy
-	LibraryInvalidZip = start_application_error.LibraryInvalidZip
-	DataNotFound = start_application_error.DataNotFound
-	DataBusy = start_application_error.DataBusy
-	DataInvalidName = start_application_error.DataInvalidName
-	DataAlreadyExists = start_application_error.DataAlreadyExists
-	DataInvalidSize = start_application_error.DataInvalidSize
-	DataNotAnArray = start_application_error.DataNotAnArray
-	RoutineInvalidName = start_application_error.RoutineInvalidName
-	RoutineAlreadyExists = start_application_error.RoutineAlreadyExists
-	RoutineNameTooLong = start_application_error.RoutineNameTooLong
-	RoutineInvalidParamPosition = start_application_error.RoutineInvalidParamPosition
-	RoutineNotFound = start_application_error.RoutineNotFound
-	RoutineBusy = start_application_error.RoutineBusy
-	ProjectBusy = start_application_error.ProjectBusy
-	ProjectInvalidName = start_application_error.ProjectInvalidName
-	ProjectInvalidAlias = start_application_error.ProjectInvalidAlias
-	ProjectAliasAlreadyUsed = start_application_error.ProjectAliasAlreadyUsed
-	ProjectAlreadyExists = start_application_error.ProjectAlreadyExists
-	ProjectCodeError = start_application_error.ProjectCodeError
-	ProjectDataError = start_application_error.ProjectDataError
-	StartRoutineNotFound = start_application_error.StartRoutineNotFound
-	ProjectInvalidMain = start_application_error.ProjectInvalidMain
-	ProjectInvalidProject = start_application_error.ProjectInvalidProject
-	StopRoutineNotFound = start_application_error.StopRoutineNotFound
-	ProjectInvalidDestructor = start_application_error.ProjectInvalidDestructor
-	ProjectDefaultStackTooSmall = start_application_error.ProjectDefaultStackTooSmall
-	ProjectAlreadyRunning = start_application_error.ProjectAlreadyRunning
-	ProjectAlreadyEnding = start_application_error.ProjectAlreadyEnding
-	ProjectLocked = start_application_error.ProjectLocked
-	ProjectFileError = start_application_error.ProjectFileError
-	ProjectFilemanagerNotFound = start_application_error.ProjectFilemanagerNotFound
-	ProjectLibraryError = start_application_error.ProjectLibraryError
-	ProjectUnresolvedSymbol = start_application_error.ProjectUnresolvedSymbol
-	ProjectInconsistantResolvedSymbol = start_application_error.ProjectInconsistantResolvedSymbol
-	ProjectInterfaceStillUsed = start_application_error.ProjectInterfaceStillUsed
-	ProjectUsedAsStruct = start_application_error.ProjectUsedAsStruct
-	ProjectInterfaceTaskNotKilled = start_application_error.ProjectInterfaceTaskNotKilled
-	ProjectInvalidTypename = start_application_error.ProjectInvalidTypename
-	ProjectTypenameAlreadyUsed = start_application_error.ProjectTypenameAlreadyUsed
-	ProjectTypeProjectError = start_application_error.ProjectTypeProjectError
-	ProjectTypeBusy = start_application_error.ProjectTypeBusy
-	ProjectCircularReference = start_application_error.ProjectCircularReference
+	MemoryFull = int(start_application_error.MemoryFull)
+	LibraryBusy = int(start_application_error.LibraryBusy)
+	LibraryInvalidZip = int(start_application_error.LibraryInvalidZip)
+	DataNotFound = int(start_application_error.DataNotFound)
+	DataBusy = int(start_application_error.DataBusy)
+	DataInvalidName = int(start_application_error.DataInvalidName)
+	DataAlreadyExists = int(start_application_error.DataAlreadyExists)
+	DataInvalidSize = int(start_application_error.DataInvalidSize)
+	DataNotAnArray = int(start_application_error.DataNotAnArray)
+	RoutineInvalidName = int(start_application_error.RoutineInvalidName)
+	RoutineAlreadyExists = int(start_application_error.RoutineAlreadyExists)
+	RoutineNameTooLong = int(start_application_error.RoutineNameTooLong)
+	RoutineInvalidParamPosition = int(start_application_error.RoutineInvalidParamPosition)
+	RoutineNotFound = int(start_application_error.RoutineNotFound)
+	RoutineBusy = int(start_application_error.RoutineBusy)
+	ProjectBusy = int(start_application_error.ProjectBusy)
+	ProjectInvalidName = int(start_application_error.ProjectInvalidName)
+	ProjectInvalidAlias = int(start_application_error.ProjectInvalidAlias)
+	ProjectAliasAlreadyUsed = int(start_application_error.ProjectAliasAlreadyUsed)
+	ProjectAlreadyExists = int(start_application_error.ProjectAlreadyExists)
+	ProjectCodeError = int(start_application_error.ProjectCodeError)
+	ProjectDataError = int(start_application_error.ProjectDataError)
+	StartRoutineNotFound = int(start_application_error.StartRoutineNotFound)
+	ProjectInvalidMain = int(start_application_error.ProjectInvalidMain)
+	ProjectInvalidProject = int(start_application_error.ProjectInvalidProject)
+	StopRoutineNotFound = int(start_application_error.StopRoutineNotFound)
+	ProjectInvalidDestructor = int(start_application_error.ProjectInvalidDestructor)
+	ProjectDefaultStackTooSmall = int(start_application_error.ProjectDefaultStackTooSmall)
+	ProjectAlreadyRunning = int(start_application_error.ProjectAlreadyRunning)
+	ProjectAlreadyEnding = int(start_application_error.ProjectAlreadyEnding)
+	ProjectLocked = int(start_application_error.ProjectLocked)
+	ProjectFileError = int(start_application_error.ProjectFileError)
+	ProjectFilemanagerNotFound = int(start_application_error.ProjectFilemanagerNotFound)
+	ProjectLibraryError = int(start_application_error.ProjectLibraryError)
+	ProjectUnresolvedSymbol = int(start_application_error.ProjectUnresolvedSymbol)
+	ProjectInconsistantResolvedSymbol = int(start_application_error.ProjectInconsistantResolvedSymbol)
+	ProjectInterfaceStillUsed = int(start_application_error.ProjectInterfaceStillUsed)
+	ProjectUsedAsStruct = int(start_application_error.ProjectUsedAsStruct)
+	ProjectInterfaceTaskNotKilled = int(start_application_error.ProjectInterfaceTaskNotKilled)
+	ProjectInvalidTypename = int(start_application_error.ProjectInvalidTypename)
+	ProjectTypenameAlreadyUsed = int(start_application_error.ProjectTypenameAlreadyUsed)
+	ProjectTypeProjectError = int(start_application_error.ProjectTypeProjectError)
+	ProjectTypeBusy = int(start_application_error.ProjectTypeBusy)
+	ProjectCircularReference = int(start_application_error.ProjectCircularReference)
+
+	def __repr__(self):
+		for name, value in vars(StartApplicationError).items():
+			if not name.startswith('_') and isinstance(value, int) and value == self:
+				return name
+		return str(int(self))

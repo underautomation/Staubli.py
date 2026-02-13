@@ -7,6 +7,8 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
 from UnderAutomation.Staubli.Soap.Data import MotionDesc as motion_desc
+from UnderAutomation.Staubli.Soap.Data import MoveType as move_type
+from UnderAutomation.Staubli.Soap.Data import BlendType as blend_type
 
 class MotionDesc:
 	def __init__(self, _internal = 0):
@@ -31,7 +33,7 @@ class MotionDesc:
 		return MoveType(self._instance.AbsRel)
 	@abs_rel.setter
 	def abs_rel(self, value: MoveType):
-		self._instance.AbsRel = value
+		self._instance.AbsRel = move_type(int(value))
 	@property
 	def config(self) -> Config:
 		return Config(self._instance.Config)
@@ -43,7 +45,7 @@ class MotionDesc:
 		return BlendType(self._instance.BlendType)
 	@blend_type.setter
 	def blend_type(self, value: BlendType):
-		self._instance.BlendType = value
+		self._instance.BlendType = blend_type(int(value))
 	@property
 	def distance_blend_previous(self) -> float:
 		return self._instance.DistanceBlendPrevious

@@ -13,6 +13,8 @@ class Config:
 			self._instance = config()
 		else:
 			self._instance = _internal
+	def __repr__(self):
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def anthro_config(self) -> AnthroConfig:
 		return AnthroConfig(self._instance.AnthroConfig)
