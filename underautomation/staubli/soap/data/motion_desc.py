@@ -21,13 +21,13 @@ class MotionDesc:
 		return Frame(self._instance.Tool)
 	@tool.setter
 	def tool(self, value: Frame):
-		self._instance.Tool = value
+		self._instance.Tool = value._instance if value else None
 	@property
 	def frame(self) -> Frame:
 		return Frame(self._instance.Frame)
 	@frame.setter
 	def frame(self, value: Frame):
-		self._instance.Frame = value
+		self._instance.Frame = value._instance if value else None
 	@property
 	def abs_rel(self) -> MoveType:
 		return MoveType(self._instance.AbsRel)
@@ -39,7 +39,7 @@ class MotionDesc:
 		return Config(self._instance.Config)
 	@config.setter
 	def config(self, value: Config):
-		self._instance.Config = value
+		self._instance.Config = value._instance if value else None
 	@property
 	def blend_type(self) -> BlendType:
 		return BlendType(self._instance.BlendType)

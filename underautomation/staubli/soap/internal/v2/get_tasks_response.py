@@ -16,4 +16,4 @@ class GetTasksResponse:
 		return [ControllerTask(x) for x in self._instance.Tasks]
 	@tasks.setter
 	def tasks(self, value: typing.List[ControllerTask]):
-		self._instance.Tasks = value
+		self._instance.Tasks = value._instance if value else None

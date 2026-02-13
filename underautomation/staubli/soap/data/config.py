@@ -20,16 +20,16 @@ class Config:
 		return AnthroConfig(self._instance.AnthroConfig)
 	@anthro_config.setter
 	def anthro_config(self, value: AnthroConfig):
-		self._instance.AnthroConfig = value
+		self._instance.AnthroConfig = value._instance if value else None
 	@property
 	def scara_config(self) -> ScaraConfig:
 		return ScaraConfig(self._instance.ScaraConfig)
 	@scara_config.setter
 	def scara_config(self, value: ScaraConfig):
-		self._instance.ScaraConfig = value
+		self._instance.ScaraConfig = value._instance if value else None
 	@property
 	def vrbx_config(self) -> VrbxConfig:
 		return VrbxConfig(self._instance.VrbxConfig)
 	@vrbx_config.setter
 	def vrbx_config(self, value: VrbxConfig):
-		self._instance.VrbxConfig = value
+		self._instance.VrbxConfig = value._instance if value else None

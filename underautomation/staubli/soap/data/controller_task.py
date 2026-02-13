@@ -54,4 +54,4 @@ class ControllerTask:
 		return ProgramLine(self._instance.ProgramLine)
 	@program_line.setter
 	def program_line(self, value: ProgramLine):
-		self._instance.ProgramLine = value
+		self._instance.ProgramLine = value._instance if value else None

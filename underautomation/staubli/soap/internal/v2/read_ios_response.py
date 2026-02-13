@@ -16,4 +16,4 @@ class ReadIosResponse:
 		return [PhysicalIoState(x) for x in self._instance.state]
 	@state.setter
 	def state(self, value: typing.List[PhysicalIoState]):
-		self._instance.state = value
+		self._instance.state = value._instance if value else None

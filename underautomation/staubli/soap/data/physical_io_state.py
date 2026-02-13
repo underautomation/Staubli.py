@@ -42,4 +42,4 @@ class PhysicalIoState:
 		return PhysicalIoAttribute(self._instance.Attribute)
 	@attribute.setter
 	def attribute(self, value: PhysicalIoAttribute):
-		self._instance.Attribute = value
+		self._instance.Attribute = value._instance if value else None

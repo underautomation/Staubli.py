@@ -23,16 +23,16 @@ class MoveCRequest:
 		return Frame(self._instance.frameB)
 	@frame_b.setter
 	def frame_b(self, value: Frame):
-		self._instance.frameB = value
+		self._instance.frameB = value._instance if value else None
 	@property
 	def frame_c(self) -> Frame:
 		return Frame(self._instance.frameC)
 	@frame_c.setter
 	def frame_c(self, value: Frame):
-		self._instance.frameC = value
+		self._instance.frameC = value._instance if value else None
 	@property
 	def mdesc(self) -> MotionDesc:
 		return MotionDesc(self._instance.mdesc)
 	@mdesc.setter
 	def mdesc(self, value: MotionDesc):
-		self._instance.mdesc = value
+		self._instance.mdesc = value._instance if value else None

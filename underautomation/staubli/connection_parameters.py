@@ -28,4 +28,4 @@ class ConnectionParameters:
 		return SoapConnectParameters(self._instance.Soap)
 	@soap.setter
 	def soap(self, value: SoapConnectParameters):
-		self._instance.Soap = value
+		self._instance.Soap = value._instance if value else None

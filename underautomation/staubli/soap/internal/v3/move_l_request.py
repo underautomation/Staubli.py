@@ -23,10 +23,10 @@ class MoveLRequest:
 		return Frame(self._instance.frame)
 	@frame.setter
 	def frame(self, value: Frame):
-		self._instance.frame = value
+		self._instance.frame = value._instance if value else None
 	@property
 	def mdesc(self) -> MotionDesc:
 		return MotionDesc(self._instance.mdesc)
 	@mdesc.setter
 	def mdesc(self, value: MotionDesc):
-		self._instance.mdesc = value
+		self._instance.mdesc = value._instance if value else None

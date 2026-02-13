@@ -16,4 +16,4 @@ class GetApplications1Response:
 		return [ValApplication(x) for x in self._instance.Applications]
 	@applications.setter
 	def applications(self, value: typing.List[ValApplication]):
-		self._instance.Applications = value
+		self._instance.Applications = value._instance if value else None

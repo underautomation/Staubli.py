@@ -17,10 +17,10 @@ class PhysicalIoAttribute:
 		return PhysicalAioAttribute(self._instance.AioAttribute)
 	@aio_attribute.setter
 	def aio_attribute(self, value: PhysicalAioAttribute):
-		self._instance.AioAttribute = value
+		self._instance.AioAttribute = value._instance if value else None
 	@property
 	def dio_attribute(self) -> PhysicalDioAttribute:
 		return PhysicalDioAttribute(self._instance.DioAttribute)
 	@dio_attribute.setter
 	def dio_attribute(self, value: PhysicalDioAttribute):
-		self._instance.DioAttribute = value
+		self._instance.DioAttribute = value._instance if value else None

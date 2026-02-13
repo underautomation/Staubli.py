@@ -16,7 +16,7 @@ class GetRobotDhParametersResponse:
 		return [DhParameters(x) for x in self._instance.dhParametersArray]
 	@dh_parameters_array.setter
 	def dh_parameters_array(self, value: typing.List[DhParameters]):
-		self._instance.dhParametersArray = value
+		self._instance.dhParametersArray = value._instance if value else None
 	@property
 	def last_d_param(self) -> float:
 		return self._instance.lastDParam

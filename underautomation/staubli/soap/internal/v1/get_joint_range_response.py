@@ -16,4 +16,4 @@ class GetJointRangeResponse:
 		return JointRange(self._instance.range)
 	@range.setter
 	def range(self, value: JointRange):
-		self._instance.range = value
+		self._instance.range = value._instance if value else None

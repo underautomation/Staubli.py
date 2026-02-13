@@ -20,10 +20,10 @@ class ForwardKinResponse(IForwardKinematics):
 		return Frame(self._instance.Position)
 	@position.setter
 	def position(self, value: Frame):
-		self._instance.Position = value
+		self._instance.Position = value._instance if value else None
 	@property
 	def config(self) -> Config:
 		return Config(self._instance.Config)
 	@config.setter
 	def config(self, value: Config):
-		self._instance.Config = value
+		self._instance.Config = value._instance if value else None

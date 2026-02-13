@@ -28,4 +28,4 @@ class MoveJJRequest:
 		return MotionDesc(self._instance.mdesc)
 	@mdesc.setter
 	def mdesc(self, value: MotionDesc):
-		self._instance.mdesc = value
+		self._instance.mdesc = value._instance if value else None

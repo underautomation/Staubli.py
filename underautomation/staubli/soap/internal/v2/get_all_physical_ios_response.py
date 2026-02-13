@@ -16,4 +16,4 @@ class GetAllPhysicalIosResponse:
 		return GetAllPhysicalIosResponseData(self._instance.Data)
 	@data.setter
 	def data(self, value: GetAllPhysicalIosResponseData):
-		self._instance.Data = value
+		self._instance.Data = value._instance if value else None

@@ -30,16 +30,16 @@ class ReverseKinRequest:
 		return Frame(self._instance.target)
 	@target.setter
 	def target(self, value: Frame):
-		self._instance.target = value
+		self._instance.target = value._instance if value else None
 	@property
 	def config(self) -> Config:
 		return Config(self._instance.config)
 	@config.setter
 	def config(self, value: Config):
-		self._instance.config = value
+		self._instance.config = value._instance if value else None
 	@property
 	def joint_range(self) -> JointRange:
 		return JointRange(self._instance.jointRange)
 	@joint_range.setter
 	def joint_range(self, value: JointRange):
-		self._instance.jointRange = value
+		self._instance.jointRange = value._instance if value else None

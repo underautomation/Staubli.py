@@ -22,10 +22,10 @@ class GetRobotJntCartPosRequest:
 		return CartesianPosition(self._instance.tool)
 	@tool.setter
 	def tool(self, value: CartesianPosition):
-		self._instance.tool = value
+		self._instance.tool = value._instance if value else None
 	@property
 	def frame(self) -> CartesianPosition:
 		return CartesianPosition(self._instance.frame)
 	@frame.setter
 	def frame(self, value: CartesianPosition):
-		self._instance.frame = value
+		self._instance.frame = value._instance if value else None

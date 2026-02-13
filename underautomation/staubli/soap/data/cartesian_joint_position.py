@@ -22,4 +22,4 @@ class CartesianJointPosition:
 		return CartesianPosition(self._instance.CartesianPosition)
 	@cartesian_position.setter
 	def cartesian_position(self, value: CartesianPosition):
-		self._instance.CartesianPosition = value
+		self._instance.CartesianPosition = value._instance if value else None

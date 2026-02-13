@@ -22,4 +22,4 @@ class GetRobotJntCartPosResponse:
 		return CartesianPosition(self._instance.cartPos)
 	@cart_pos.setter
 	def cart_pos(self, value: CartesianPosition):
-		self._instance.cartPos = value
+		self._instance.cartPos = value._instance if value else None

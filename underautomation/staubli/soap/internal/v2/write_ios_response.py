@@ -16,4 +16,4 @@ class WriteIosResponse:
 		return [PhysicalIoWriteResponse(x) for x in self._instance.out]
 	@out.setter
 	def out(self, value: typing.List[PhysicalIoWriteResponse]):
-		self._instance.out = value
+		self._instance.out = value._instance if value else None
