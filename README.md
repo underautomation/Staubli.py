@@ -308,7 +308,9 @@ controller.disconnect()
 **⚠️ Commercial license required**  
 🔗 [View EULA](https://underautomation.com/staubli/eula)
 
-Register your license at runtime with:
+When you purchase a license, you receive a license key that can be registered at runtime. This allows you to use the SDK without any limitations or trial restrictions.
+
+After cloning the repository, or installing the package, you have an automatic 30-days trial period. After the trial expires, you can obtain a license key from [underautomation.com/license](https://underautomation.com/license?sdk=staubli) and register it in your code to continue using the SDK:
 
 ```python
 from underautomation.staubli.staubli_controller import StaubliController
