@@ -279,9 +279,9 @@ for task in controller.soap.get_tasks():
     print(f"{task.name}: state={task.state!r}, priority={task.priority}, created_by={task.created_by}")
 
 # Suspend, resume, and kill a task
-controller.soap.task_suspend("MyTask", "default")
-controller.soap.task_resume("MyTask", "default")
-controller.soap.task_kill("MyTask", "default")
+controller.soap.task_suspend("project~", "default")
+controller.soap.task_resume("project~", "default")
+controller.soap.task_kill("project~", "default")
 ```
 
 ---
