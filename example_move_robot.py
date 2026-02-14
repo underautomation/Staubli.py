@@ -71,17 +71,25 @@ mdesc.frame = Frame()                   # World frame (identity)
 # ---------------------------------------------------------------------------
 # 4. Warn the user, power on, move, then power off
 # ---------------------------------------------------------------------------
-print("WARNING: The robot will be powered on and moved to joint position [0, 0, 0, 0, 0, 0].")
+print("WARNING: The robot will be powered on")
 input("Press ENTER to continue...")
 
 # Power on the robot arm
 controller.soap.set_power(True)
 print("Robot powered on.")
 
+print()
+print("WARNING: The robot will be moved to joint position [0, 0, 0, 0, 0, 0].")
+input("Press ENTER to continue...")
+
 # Execute a joint move (MoveJ) to the zero position on robot index 0
 target_joints = [0, 0, 0, 0, 0, 0]
 ret = controller.soap.move_jj(0, target_joints, mdesc)
-print(f"MoveJ result: {ret.return_code}")
+print(f"MoveJ result: {ret.return_code.name}")
+
+print()
+print("WARNING: The robot will be powered off.")
+input("Press ENTER to continue...")
 
 # Power off the robot arm
 controller.soap.set_power(False)
