@@ -61,8 +61,8 @@ for i, robot in enumerate(robots):
     print(f"  Robot {i}:")
     print(f"    Arm        : {robot.arm}")
     print(f"    Tuning     : {robot.tuning}")
-    print(f"    Kinematic  : {robot.kinematic}")
-    print(f"    Mount Type : {robot.mount_type}")
+    print(f"    Kinematic  : {robot.kinematic.name}")
+    print(f"    Mount Type : {robot.mount_type.name}")
     print()
 
 # ---------------------------------------------------------------------------

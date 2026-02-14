@@ -94,7 +94,7 @@ while True:
             state = io_states[0]
             print(f"\n  IO Name   : {io_name}")
             print(f"  Value     : {state.value}")
-            print(f"  State     : {state.state}")
+            print(f"  State     : {state.state.name}")
             print(f"  Locked    : {state.locked}")
             print(f"  Simulated : {state.simulated}")
             print()

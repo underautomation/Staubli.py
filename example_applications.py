@@ -38,7 +38,7 @@ def display_tasks(controller):
     print(f"  {'-'*20}  {'-'*12}  {'-'*10}  {'-'*20}")
     
     for task in tasks:
-        print(f"  {task.name:<20}  {task.state!r:<12}  {task.priority:<10}  {task.created_by:<20}")
+        print(f"  {task.name:<20}  {task.state.name:<12}  {task.priority:<10}  {task.created_by:<20}")
     
     return tasks
 
@@ -196,7 +196,7 @@ tasks = display_tasks(controller)
 for task in tasks:
     if task.name == task_name:
         print(f"\n  Detailed info for task '{task_name}':")
-        print(f"    State                  : {task.state!r}")
+        print(f"    State                  : {task.state.name}")
         print(f"    Priority               : {task.priority}")
         print(f"    Created By             : {task.created_by}")
         print(f"    Runtime Error          : {task.runtime_error}")
