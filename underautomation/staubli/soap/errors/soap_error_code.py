@@ -1,34 +1,26 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
-from UnderAutomation.Staubli.Soap.Errors import SoapErrorCode as soap_error_code
+from enum import IntEnum
 
-class SoapErrorCode(int):
-	Unknown = int(soap_error_code.Unknown)
-	InvalidCredentials = int(soap_error_code.InvalidCredentials)
-	TaskNotFound = int(soap_error_code.TaskNotFound)
-	MismatchedCode = int(soap_error_code.MismatchedCode)
-	ProgramNotFound = int(soap_error_code.ProgramNotFound)
-	TaskAlreadyLocked = int(soap_error_code.TaskAlreadyLocked)
-	SinReturnCodeNok = int(soap_error_code.SinReturnCodeNok)
-	SchedulingModeError = int(soap_error_code.SchedulingModeError)
-	ApplicationNotFound = int(soap_error_code.ApplicationNotFound)
-	StackFrameNotFound = int(soap_error_code.StackFrameNotFound)
-	ProgramLineNotFound = int(soap_error_code.ProgramLineNotFound)
-	ReadAccessErrorCode = int(soap_error_code.ReadAccessErrorCode)
-	SetPosNotSimulCode = int(soap_error_code.SetPosNotSimulCode)
-	InvalidSessionIdCode = int(soap_error_code.InvalidSessionIdCode)
-	WriteAccessErrorCode = int(soap_error_code.WriteAccessErrorCode)
-	CannotStartApplication = int(soap_error_code.CannotStartApplication)
-	ClientAlreadyConnected = int(soap_error_code.ClientAlreadyConnected)
-	IoWriteAccessErrorCode = int(soap_error_code.IoWriteAccessErrorCode)
-	ClientCommunicationError = int(soap_error_code.ClientCommunicationError)
-	IoWriteAccessErrorValidation = int(soap_error_code.IoWriteAccessErrorValidation)
-	IoWriteAccessErrorWorkingMode = int(soap_error_code.IoWriteAccessErrorWorkingMode)
-	InvalidRobotIdCode = int(soap_error_code.InvalidRobotIdCode)
-
-	def __repr__(self):
-		for name, value in vars(SoapErrorCode).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class SoapErrorCode(IntEnum):
+	'''Error codes returned by the SOAP service.'''
+	Unknown = -1 # Unknown or unrecognized error code.
+	InvalidCredentials = 0 # The provided credentials are invalid.
+	TaskNotFound = 1 # The specified task was not found.
+	MismatchedCode = 2 # Mismatched code error.
+	ProgramNotFound = 3 # The specified program was not found.
+	TaskAlreadyLocked = 4 # The task is already locked by another client.
+	SinReturnCodeNok = 5 # SIN return code indicates failure.
+	SchedulingModeError = 6 # Scheduling mode error.
+	ApplicationNotFound = 7 # The specified application was not found.
+	StackFrameNotFound = 8 # The specified stack frame was not found.
+	ProgramLineNotFound = 9 # The specified program line was not found.
+	ReadAccessErrorCode = 10 # Read access error.
+	SetPosNotSimulCode = 11 # Cannot set position outside simulation mode.
+	InvalidSessionIdCode = 12 # The session ID is invalid or expired.
+	WriteAccessErrorCode = 13 # Write access error.
+	CannotStartApplication = 14 # Cannot start the application.
+	ClientAlreadyConnected = 15 # A client is already connected.
+	IoWriteAccessErrorCode = 16 # I/O write access error.
+	ClientCommunicationError = 17 # Client communication error.
+	IoWriteAccessErrorValidation = 18 # I/O write access validation error.
+	IoWriteAccessErrorWorkingMode = 19 # I/O write access error due to working mode.
+	InvalidRobotIdCode = 20 # The specified robot ID is invalid.

@@ -1,19 +1,38 @@
 import typing
 from underautomation.staubli.soap.data.parameter import Parameter
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
 from UnderAutomation.Staubli.Soap.Internal.V0 import GetControllerParametersResponse as get_controller_parameters_response
 
 class GetControllerParametersResponse:
+	'''SOAP response containing the controller parameters.'''
 	def __init__(self, out: typing.List[Parameter], _internal = 0):
+		'''Initializes a new instance with the specified parameters.
+
+		:param out: Array of controller parameters.
+		'''
 		if(_internal == 0):
 			self._instance = get_controller_parameters_response(out)
 		else:
 			self._instance = _internal
+
 	@property
 	def out(self) -> typing.List[Parameter]:
+		'''Array of controller parameters.'''
 		return [Parameter(x) for x in self._instance.out]
+
 	@out.setter
 	def out(self, value: typing.List[Parameter]):
 		self._instance.out = value._instance if value else None
+
+	def __str__(self):
+		return self._instance.ToString() if self._instance is not None else ""
+
+	def __repr__(self):
+		return self.__str__()
+
+	def __eq__(self, other) -> bool:
+		if not isinstance(other, GetControllerParametersResponse):
+			NotImplemented
+		return self._instance.Equals(other._instance)
+
+	def __hash__(self) -> int:
+		return self._instance.GetHashCode() if self._instance is not None else 0

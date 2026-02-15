@@ -1,16 +1,8 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
-from UnderAutomation.Staubli.Soap.Data import ShoulderConfig as shoulder_config
+from enum import IntEnum
 
-class ShoulderConfig(int):
-	Same = int(shoulder_config.Same)
-	Lefty = int(shoulder_config.Lefty)
-	Righty = int(shoulder_config.Righty)
-	Free = int(shoulder_config.Free)
-
-	def __repr__(self):
-		for name, value in vars(ShoulderConfig).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class ShoulderConfig(IntEnum):
+	'''Shoulder configuration for the robot arm.'''
+	Same = 0 # Keep the same configuration as the current one.
+	Lefty = 1 # Left-handed configuration.
+	Righty = 2 # Right-handed configuration.
+	Free = 3 # Free configuration (no constraint).

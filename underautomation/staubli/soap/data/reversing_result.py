@@ -1,21 +1,13 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
-from UnderAutomation.Staubli.Soap.Data import ReversingResult as reversing_result
+from enum import IntEnum
 
-class ReversingResult(int):
-	Success = int(reversing_result.Success)
-	NoConvergence = int(reversing_result.NoConvergence)
-	JointOutOfRange = int(reversing_result.JointOutOfRange)
-	OutOfWorkspace = int(reversing_result.OutOfWorkspace)
-	InvalidConfiguration = int(reversing_result.InvalidConfiguration)
-	InvalidOrientation = int(reversing_result.InvalidOrientation)
-	UnsupportedKinematics = int(reversing_result.UnsupportedKinematics)
-	UnconstrainedFrame = int(reversing_result.UnconstrainedFrame)
-	InvalidErrorCode = int(reversing_result.InvalidErrorCode)
-
-	def __repr__(self):
-		for name, value in vars(ReversingResult).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class ReversingResult(IntEnum):
+	'''Result code for reverse kinematics computation.'''
+	Success = 0 # Reverse kinematics succeeded.
+	NoConvergence = 1 # The algorithm did not converge to a solution.
+	JointOutOfRange = 2 # The computed joint position is out of range.
+	OutOfWorkspace = 3 # The target is outside the robot workspace.
+	InvalidConfiguration = 4 # The specified configuration is invalid.
+	InvalidOrientation = 5 # The specified orientation is invalid.
+	UnsupportedKinematics = 6 # The robot kinematics type is not supported.
+	UnconstrainedFrame = 7 # The frame is unconstrained.
+	InvalidErrorCode = 8 # Invalid error code returned.

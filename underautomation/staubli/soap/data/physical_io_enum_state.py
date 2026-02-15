@@ -1,15 +1,7 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
-from UnderAutomation.Staubli.Soap.Data import PhysicalIoEnumState as physical_io_enum_state
+from enum import IntEnum
 
-class PhysicalIoEnumState(int):
-	Defined = int(physical_io_enum_state.Defined)
-	Undefined = int(physical_io_enum_state.Undefined)
-	InvalidName = int(physical_io_enum_state.InvalidName)
-
-	def __repr__(self):
-		for name, value in vars(PhysicalIoEnumState).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class PhysicalIoEnumState(IntEnum):
+	'''Definition state of a physical I/O.'''
+	Defined = 0 # The I/O is defined and available.
+	Undefined = 1 # The I/O is not defined.
+	InvalidName = 2 # The I/O name is invalid.

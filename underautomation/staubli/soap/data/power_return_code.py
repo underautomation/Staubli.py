@@ -1,17 +1,9 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Staubli.dll')))
-from UnderAutomation.Staubli.Soap.Data import PowerReturnCode as power_return_code
+from enum import IntEnum
 
-class PowerReturnCode(int):
-	Success = int(power_return_code.Success)
-	RobotNotStopped = int(power_return_code.RobotNotStopped)
-	EnableTimeout = int(power_return_code.EnableTimeout)
-	DisableTimeout = int(power_return_code.DisableTimeout)
-	OnlyInRemoteMode = int(power_return_code.OnlyInRemoteMode)
-
-	def __repr__(self):
-		for name, value in vars(PowerReturnCode).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class PowerReturnCode(IntEnum):
+	'''Return code for robot power commands.'''
+	Success = 0 # Success, no error occurred.
+	RobotNotStopped = 1 # Cannot change power while the robot is not stopped.
+	EnableTimeout = 2 # Timeout while enabling power.
+	DisableTimeout = 3 # Timeout while disabling power.
+	OnlyInRemoteMode = 4 # Power can only be changed in remote mode.
