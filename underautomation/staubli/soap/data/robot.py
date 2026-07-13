@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.kinematic import Kinematic
 from underautomation.staubli.soap.data.mount_type import MountType

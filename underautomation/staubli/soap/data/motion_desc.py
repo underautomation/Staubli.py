@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.frame import Frame
 from underautomation.staubli.soap.data.move_type import MoveType

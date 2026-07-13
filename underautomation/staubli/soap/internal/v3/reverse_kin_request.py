@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.frame import Frame
 from underautomation.staubli.soap.data.config import Config
@@ -16,7 +17,7 @@ class ReverseKinRequest:
 		:param jointRange: Allowed joint range limits.
 		'''
 		if(_internal == 0):
-			self._instance = reverse_kin_request(robot, jointIn, target, config, jointRange)
+			self._instance = reverse_kin_request(robot, jointIn, target._instance if target else None, config._instance if config else None, jointRange._instance if jointRange else None)
 		else:
 			self._instance = _internal
 

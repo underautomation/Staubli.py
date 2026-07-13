@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.license.license_info import LicenseInfo
 from UnderAutomation.Staubli.License import InvalidLicenseException as invalid_license_exception

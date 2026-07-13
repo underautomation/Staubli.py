@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.reversing_result import ReversingResult
 from UnderAutomation.Staubli.Soap.Data import IReverseKinematics as i_reverse_kinematics

@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.i_reverse_kinematics import IReverseKinematics
 from underautomation.staubli.soap.data.reversing_result import ReversingResult
@@ -13,7 +14,7 @@ class ReverseKinResponse(IReverseKinematics):
 		:param reversingResult: Result code of the reverse kinematics computation.
 		'''
 		if(_internal == 0):
-			self._instance = reverse_kin_response(jointOut, reversingResult)
+			self._instance = reverse_kin_response(jointOut, reversing_result(int(reversingResult)))
 		else:
 			self._instance = _internal
 

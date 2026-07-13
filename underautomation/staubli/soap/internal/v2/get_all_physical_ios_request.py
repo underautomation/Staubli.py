@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from UnderAutomation.Staubli.Soap.Internal.V2 import GetAllPhysicalIosRequest as get_all_physical_ios_request
 

@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.physical_aio_attribute import PhysicalAioAttribute
 from underautomation.staubli.soap.data.physical_dio_attribute import PhysicalDioAttribute

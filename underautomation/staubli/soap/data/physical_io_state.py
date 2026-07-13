@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.physical_io_enum_state import PhysicalIoEnumState
 from underautomation.staubli.soap.data.physical_io_attribute import PhysicalIoAttribute

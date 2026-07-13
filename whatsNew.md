@@ -1,4 +1,3 @@
-- **Enhanced Documentation**: Added comprehensive XML documentation comments to all public classes, enums, interfaces, and members
-- **ToString() Methods**: Implemented concise string representations for all data classes
-- **Equals() & GetHashCode()**: Added proper equality comparison methods to all data classes
-- **MotionDesc Defaults**: Frame property now initializes to World frame instead of null; Tool property initializes to flange center as TCP
+## Minor changes
+
+Allows the 30-day trial period to begin without having to explicitly enter a license key. This request should only be made when requesting an extension of the trial period.

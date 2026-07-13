@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from UnderAutomation.Staubli.Soap.Internal.V0 import GetRobotJointPosRequest as get_robot_joint_pos_request
 

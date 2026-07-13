@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.i_move_result import IMoveResult
 from underautomation.staubli.soap.data.motion_return_code import MotionReturnCode
@@ -13,7 +14,7 @@ class MoveJJResponse(IMoveResult):
 		:param motRet: Motion return code.
 		'''
 		if(_internal == 0):
-			self._instance = move_jj_response(id, motRet)
+			self._instance = move_jj_response(id, motion_return_code(int(motRet)))
 		else:
 			self._instance = _internal
 

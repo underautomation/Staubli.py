@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.shoulder_config import ShoulderConfig
 from UnderAutomation.Staubli.Soap.Data import ScaraConfig as scara_config

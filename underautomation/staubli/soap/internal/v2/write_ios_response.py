@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.physical_io_write_response import PhysicalIoWriteResponse
 from UnderAutomation.Staubli.Soap.Internal.V2 import WriteIosResponse as write_ios_response

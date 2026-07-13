@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.controller_task import ControllerTask
 from UnderAutomation.Staubli.Soap.Internal.V2 import GetTasksResponse as get_tasks_response

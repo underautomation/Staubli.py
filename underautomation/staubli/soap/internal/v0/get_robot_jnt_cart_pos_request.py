@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.cartesian_position import CartesianPosition
 from UnderAutomation.Staubli.Soap.Internal.V0 import GetRobotJntCartPosRequest as get_robot_jnt_cart_pos_request
@@ -12,7 +13,7 @@ class GetRobotJntCartPosRequest:
 		:param frame: Reference frame for the Cartesian position.
 		'''
 		if(_internal == 0):
-			self._instance = get_robot_jnt_cart_pos_request(robot, tool, frame)
+			self._instance = get_robot_jnt_cart_pos_request(robot, tool._instance if tool else None, frame._instance if frame else None)
 		else:
 			self._instance = _internal
 

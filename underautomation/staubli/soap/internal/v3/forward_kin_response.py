@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.i_forward_kinematics import IForwardKinematics
 from underautomation.staubli.soap.data.frame import Frame
@@ -13,7 +14,7 @@ class ForwardKinResponse(IForwardKinematics):
 		:param config: Robot configuration.
 		'''
 		if(_internal == 0):
-			self._instance = forward_kin_response(position, config)
+			self._instance = forward_kin_response(position._instance if position else None, config._instance if config else None)
 		else:
 			self._instance = _internal
 

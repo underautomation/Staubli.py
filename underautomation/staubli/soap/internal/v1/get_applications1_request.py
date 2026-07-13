@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from UnderAutomation.Staubli.Soap.Internal.V1 import GetApplications1Request as get_applications1_request
 

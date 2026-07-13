@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from UnderAutomation.Staubli.Soap.Data import CartesianPosition as cartesian_position
 

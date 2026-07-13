@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from UnderAutomation.Staubli.Soap.Internal.V2 import LoadProjectAsyncRequest as load_project_async_request
 

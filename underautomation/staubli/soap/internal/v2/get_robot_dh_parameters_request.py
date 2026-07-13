@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from UnderAutomation.Staubli.Soap.Internal.V2 import GetRobotDhParametersRequest as get_robot_dh_parameters_request
 

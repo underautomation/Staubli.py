@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from UnderAutomation.Staubli.Soap.Internal.V0 import GetControllerParametersRequest as get_controller_parameters_request
 

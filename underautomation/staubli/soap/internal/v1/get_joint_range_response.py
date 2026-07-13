@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.joint_range import JointRange
 from UnderAutomation.Staubli.Soap.Internal.V1 import GetJointRangeResponse as get_joint_range_response
@@ -10,7 +11,7 @@ class GetJointRangeResponse:
 		:param range: Joint range data.
 		'''
 		if(_internal == 0):
-			self._instance = get_joint_range_response(range)
+			self._instance = get_joint_range_response(range._instance if range else None)
 		else:
 			self._instance = _internal
 

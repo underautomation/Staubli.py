@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.shoulder_config import ShoulderConfig
 from underautomation.staubli.soap.data.positive_negative_config import PositiveNegativeConfig

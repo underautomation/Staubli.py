@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.above_below_config import AboveBelowConfig
 from underautomation.staubli.soap.data.positive_negative_config import PositiveNegativeConfig

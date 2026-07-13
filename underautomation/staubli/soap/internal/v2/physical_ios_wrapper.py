@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.physical_io import PhysicalIo
 from UnderAutomation.Staubli.Soap.Internal.V2 import PhysicalIosWrapper as physical_ios_wrapper
@@ -17,7 +18,7 @@ class PhysicalIosWrapper:
 
 	@physical_ios.setter
 	def physical_ios(self, value: typing.List[PhysicalIo]):
-		self._instance.PhysicalIos = value
+		self._instance.PhysicalIos = [x._instance if x else None for x in value]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

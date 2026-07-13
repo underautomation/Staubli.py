@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.errors.soap_error_code import SoapErrorCode
 from UnderAutomation.Staubli.Soap.Errors import CustomSoapException as custom_soap_exception

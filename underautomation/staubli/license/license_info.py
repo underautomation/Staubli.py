@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from datetime import datetime, timedelta
 from underautomation.staubli.license.license_state import LicenseState

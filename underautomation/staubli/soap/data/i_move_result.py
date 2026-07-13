@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.motion_return_code import MotionReturnCode
 from UnderAutomation.Staubli.Soap.Data import IMoveResult as i_move_result

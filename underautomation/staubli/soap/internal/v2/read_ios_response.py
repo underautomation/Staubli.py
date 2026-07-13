@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.physical_io_state import PhysicalIoState
 from UnderAutomation.Staubli.Soap.Internal.V2 import ReadIosResponse as read_ios_response
@@ -10,7 +11,7 @@ class ReadIosResponse:
 		:param state: Array of physical I/O states.
 		'''
 		if(_internal == 0):
-			self._instance = read_ios_response(state)
+			self._instance = read_ios_response([x._instance if x else None for x in state])
 		else:
 			self._instance = _internal
 

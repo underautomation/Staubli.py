@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.robot import Robot
 from UnderAutomation.Staubli.Soap.Internal.V0 import GetRobotsResponse as get_robots_response

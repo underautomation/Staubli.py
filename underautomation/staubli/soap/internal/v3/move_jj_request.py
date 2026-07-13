@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.motion_desc import MotionDesc
 from UnderAutomation.Staubli.Soap.Internal.V3 import MoveJJRequest as move_jj_request
@@ -12,7 +13,7 @@ class MoveJJRequest:
 		:param mdesc: Motion description.
 		'''
 		if(_internal == 0):
-			self._instance = move_jj_request(robot, joint, mdesc)
+			self._instance = move_jj_request(robot, joint, mdesc._instance if mdesc else None)
 		else:
 			self._instance = _internal
 

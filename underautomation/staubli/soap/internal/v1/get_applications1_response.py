@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.val_application import ValApplication
 from UnderAutomation.Staubli.Soap.Internal.V1 import GetApplications1Response as get_applications1_response

@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.robot import Robot
 from underautomation.staubli.soap.data.cartesian_joint_position import CartesianJointPosition

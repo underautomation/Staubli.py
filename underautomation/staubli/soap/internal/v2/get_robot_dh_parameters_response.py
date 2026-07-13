@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.dh_parameters import DhParameters
 from UnderAutomation.Staubli.Soap.Internal.V2 import GetRobotDhParametersResponse as get_robot_dh_parameters_response
@@ -11,7 +12,7 @@ class GetRobotDhParametersResponse:
 		:param lastDParam: Last D parameter value.
 		'''
 		if(_internal == 0):
-			self._instance = get_robot_dh_parameters_response(dhParametersArray, lastDParam)
+			self._instance = get_robot_dh_parameters_response([x._instance if x else None for x in dhParametersArray], lastDParam)
 		else:
 			self._instance = _internal
 

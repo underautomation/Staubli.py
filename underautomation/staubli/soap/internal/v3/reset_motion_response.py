@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.motion_return_code import MotionReturnCode
 from UnderAutomation.Staubli.Soap.Internal.V3 import ResetMotionResponse as reset_motion_response
@@ -11,7 +12,7 @@ class ResetMotionResponse:
 		:param motRet: Motion return code.
 		'''
 		if(_internal == 0):
-			self._instance = reset_motion_response(motRet)
+			self._instance = reset_motion_response(motion_return_code(int(motRet)))
 		else:
 			self._instance = _internal
 

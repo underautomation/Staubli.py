@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.internal.soap_connect_parameters_base import SoapConnectParametersBase
 from UnderAutomation.Staubli.Common import SoapConnectParameters as soap_connect_parameters

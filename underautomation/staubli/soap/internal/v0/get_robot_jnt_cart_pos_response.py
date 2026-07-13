@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.cartesian_position import CartesianPosition
 from UnderAutomation.Staubli.Soap.Internal.V0 import GetRobotJntCartPosResponse as get_robot_jnt_cart_pos_response
@@ -11,7 +12,7 @@ class GetRobotJntCartPosResponse:
 		:param cartPos: Cartesian position of the tool.
 		'''
 		if(_internal == 0):
-			self._instance = get_robot_jnt_cart_pos_response(jntPos, cartPos)
+			self._instance = get_robot_jnt_cart_pos_response(jntPos, cartPos._instance if cartPos else None)
 		else:
 			self._instance = _internal
 

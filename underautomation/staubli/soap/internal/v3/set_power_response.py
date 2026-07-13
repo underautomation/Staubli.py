@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.power_return_code import PowerReturnCode
 from UnderAutomation.Staubli.Soap.Internal.V3 import SetPowerResponse as set_power_response
@@ -11,7 +12,7 @@ class SetPowerResponse:
 		:param code: Power operation return code.
 		'''
 		if(_internal == 0):
-			self._instance = set_power_response(code)
+			self._instance = set_power_response(power_return_code(int(code)))
 		else:
 			self._instance = _internal
 

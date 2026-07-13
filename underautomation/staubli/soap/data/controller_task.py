@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.controller_task_state import ControllerTaskState
 from underautomation.staubli.soap.data.program_line import ProgramLine

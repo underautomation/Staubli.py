@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.anthro_config import AnthroConfig
 from underautomation.staubli.soap.data.scara_config import ScaraConfig

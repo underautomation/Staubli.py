@@ -1,3 +1,4 @@
+from __future__ import annotations
 import typing
 from underautomation.staubli.soap.data.parameter import Parameter
 from UnderAutomation.Staubli.Soap.Internal.V0 import GetControllerParametersResponse as get_controller_parameters_response
@@ -10,7 +11,7 @@ class GetControllerParametersResponse:
 		:param out: Array of controller parameters.
 		'''
 		if(_internal == 0):
-			self._instance = get_controller_parameters_response(out)
+			self._instance = get_controller_parameters_response([x._instance if x else None for x in out])
 		else:
 			self._instance = _internal
 
