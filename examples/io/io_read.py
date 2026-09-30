@@ -9,27 +9,23 @@ This script demonstrates how to read physical I/O signals:
   5. Loop to allow reading multiple IOs
 
 Requirements:
-  - A Staubli controller (or emulator) reachable at the specified IP address
+  - A Staubli controller (or the emulator of Staubli Robotics Suite) reachable from this PC.
+    The address, the SOAP user and the password are asked once and saved in examples/robot_config.json
   - The UnderAutomation.Staubli Python package installed
 
 Usage:
-  python example_read_ios.py
+  python examples/io/io_read.py
 """
+import sys, os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
-from underautomation.staubli.connection_parameters import ConnectionParameters
-from underautomation.staubli.staubli_controller import StaubliController
+from examples import connect_robot
+
 
 # ---------------------------------------------------------------------------
-# 1. Create a controller instance and connect
+# 1. Connect (settings and license asked by examples/__init__.py)
 # ---------------------------------------------------------------------------
-controller = StaubliController()
-
-# If you get a InvalidLicenseException while connecting, get a trial license key from https://underautomation.com/license
-#StaubliController.register_license("licensee", "license_key")
-
-params = ConnectionParameters("127.0.0.1")
-controller.connect(params)
-print("Connected to the controller.\n")
+controller = connect_robot()
 
 # ---------------------------------------------------------------------------
 # 2. Retrieve all physical IOs

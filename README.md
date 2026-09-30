@@ -1,345 +1,236 @@
-# Staubli Communication SDK for Python
+# Staubli Robot Communication SDK for Python
 
-[![UnderAutomation Staubli communication SDK](https://raw.githubusercontent.com/underautomation/Staubli.NET/refs/heads/main/.github/assets/banner.png)](https://underautomation.com)
+[![PyPI](https://img.shields.io/pypi/v/UnderAutomation.Staubli?label=PyPI&logo=pypi)](https://pypi.org/project/UnderAutomation.Staubli/)
+[![PyPI downloads](https://img.shields.io/pypi/dm/UnderAutomation.Staubli?label=Downloads&logo=pypi)](https://pypi.org/project/UnderAutomation.Staubli/)
+[![Python](https://img.shields.io/badge/Python-3.7_to_3.13-blue)](#compatibility)
+[![Platforms](https://img.shields.io/badge/OS-Windows_Linux_macOS-informational)](#compatibility)
+[![License](https://img.shields.io/badge/license-commercial-blue)](https://underautomation.com/staubli/eula)
 
-[![PyPI](https://img.shields.io/pypi/dm/UnderAutomation.Staubli?label=PyPI%20Downloads&logo=pypi)](https://pypi.org/project/UnderAutomation.Staubli/)
-[![Python](https://img.shields.io/badge/Python-3.7+-blue)](#)
-[![SOAP](https://img.shields.io/badge/Protocol-SOAP-orange)](#)
-[![Platforms](https://img.shields.io/badge/OS-Windows%20%7C%20Linux%20%7C%20macOS-informational)](#)
+**UnderAutomation.Staubli** is a Python package that communicates with Staubli **CS8** and **CS9** robot
+controllers through the **SOAP server** of the controller. Nothing is installed on the controller. No
+other Staubli software is needed on the PC.
 
-### 🤖 Effortlessly Communicate with Staubli Robots from Python
+Use it to read the robots and the controller parameters, read positions, compute the kinematics, move the
+robot, read and write I/O, and manage VAL 3 applications and tasks, from a Python script.
 
-The **Staubli Communication SDK for Python** wraps the native Staubli SOAP stack and exposes a clean, Pythonic API for automation engineers, researchers, and integrators. Use it to supervise industrial robots, orchestrate motion, exchange I/O, and manage VAL3 applications-all without requiring additional Staubli software licenses.
+- Product page: [underautomation.com/staubli](https://underautomation.com/staubli)
+- Documentation: [underautomation.com/staubli/documentation/get-started-python](https://underautomation.com/staubli/documentation/get-started-python)
+- Also available for .NET: [Staubli.NET](https://github.com/underautomation/Staubli.NET). LabVIEW: available on request, [contact us](https://underautomation.com/contact).
 
-🔗 **More Information:** [underautomation.com](https://underautomation.com/staubli/)  
-🔗 Available also for **[🟣 .NET](https://github.com/underautomation/Staubli.NET)** & **[🟨 LabVIEW](https://github.com/underautomation/Staubli.vi)**
+## How it works
 
----
+The package wraps the .NET library `UnderAutomation.Staubli.dll` with [pythonnet](https://github.com/pythonnet/pythonnet).
+The DLL is inside the package: `pip install` installs everything, including pythonnet.
 
-## 🚀 TL;DR
+- **Windows:** the DLL runs on the .NET Framework 4.x of Windows. Nothing else to install.
+- **Linux and macOS:** install the .NET runtime (for example .NET 8), then tell pythonnet to use it before
+  you start Python:
 
-✅ Install the SDK with `pip install UnderAutomation.Staubli`.  
-✅ Connect to Staubli controllers via the native SOAP protocol.  
-✅ Control motion, read/write I/O, monitor robots, and manage applications directly from Python.
+  ```bash
+  export PYTHONNET_RUNTIME=coreclr
+  ```
 
-**Highlights:**
+  Without this variable, pythonnet uses Mono, its default runtime on Linux and macOS. You can also choose
+  the runtime in your code, before the first import of the package:
 
-- ⚡ Real-time SOAP communication through the embedded `UnderAutomation.Staubli.dll`
-- 🐍 Pythonic wrappers for controllers, parameters, and data objects
-- 🔁 Full motion lifecycle & kinematics helpers
-- 📡 Access to physical & logical I/Os
-- 📦 VAL3 project and task management
+  ```python
+  from pythonnet import load
+  load("coreclr")
+  ```
 
----
+## Installation
 
-## 📦 Installation
+Python 3.7 to 3.13 is supported (the limit of pythonnet 3.0.5). Install the package in a virtual
+environment:
 
 ```bash
+python -m venv .venv
+# Windows
+.venv\Scripts\activate
+# Linux and macOS
+source .venv/bin/activate
+
 pip install UnderAutomation.Staubli
 ```
 
-The package bundles the required .NET assemblies and depends on [`pythonnet`](https://github.com/pythonnet/pythonnet) to bridge Python and .NET. Make sure the target machine has a compatible .NET runtime installed.
-
-On **Linux**, you should also install .NET Core and set environment variable PYTHONNET_RUNTIME to coreclr :
+Or install it from the sources of this repository:
 
 ```bash
-sudo apt-get install -y dotnet-runtime-8.0
-PYTHONNET_RUNTIME=coreclr
+git clone https://github.com/underautomation/Staubli.py.git
+cd Staubli.py
+pip install -e .
 ```
 
----
-
-## 📖 Examples
-
-Ready-to-run scripts are included in the repository. Each example connects to a controller, demonstrates a specific feature, and can be executed directly.
-
-| #   | File                                                                                                               | Description                                                                                                                  |
-| --- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| 1   | [`example_move_robot.py`](https://github.com/UnderAutomation/Staubli.py/blob/main/example_move_robot.py)           | Connect, compute forward & inverse kinematics, display results, then power on and move the robot to the zero joint position. |
-| 2   | [`example_controller_info.py`](https://github.com/UnderAutomation/Staubli.py/blob/main/example_controller_info.py) | Retrieve and display robots, DH parameters, joint ranges, and controller parameters.                                         |
-| 3   | [`example_read_ios.py`](https://github.com/UnderAutomation/Staubli.py/blob/main/example_read_ios.py)               | List all physical IOs, then interactively read any IO by name or index in a loop.                                            |
-| 4   | [`example_write_ios.py`](https://github.com/UnderAutomation/Staubli.py/blob/main/example_write_ios.py)             | List all physical IOs, then interactively write values to any IO by name or index in a loop.                                 |
-| 5   | [`example_applications.py`](https://github.com/UnderAutomation/Staubli.py/blob/main/example_applications.py)       | List VAL3 applications, load & start a project, then suspend, resume, and kill the task step by step.                        |
-
-Run any example with:
-
-```bash
-python example_move_robot.py
-```
-
-> **Note:** Update the IP address in each script to match your controller before running. Also, if you encounter an `InvalidLicenseException`, obtain a trial license key from [underautomation.com/license](https://underautomation.com/license?sdk=staubli) and register it in the script.
-
----
-
-## ✨ Features
-
-### 🔌 Connect to Your Controller
+## Getting started
 
 ```python
 from underautomation.staubli.staubli_controller import StaubliController
 from underautomation.staubli.connection_parameters import ConnectionParameters
 
-controller = StaubliController()
-parameters = ConnectionParameters("192.168.0.1")
+# The SDK runs in trial mode for 30 days. Register your key to remove the trial limit.
+# StaubliController.register_license("Your Company", "your-license-key")
 
-# Optional: configure SOAP credentials and port
-parameters.soap.enable = True
-parameters.soap.user = "default"
+parameters = ConnectionParameters("192.168.0.254")
+parameters.soap.user = "default"      # user of the controller
 parameters.soap.password = "default"
+parameters.soap.port = 851            # default SOAP port
 
+controller = StaubliController()
 controller.connect(parameters)
+
+joints = controller.soap.get_current_joint_position(0)
+print(list(joints))
+
+controller.disconnect()
 ```
 
-You can also disable the pre-connection ping if needed:
+`parameters.ping_before_connect` (True by default) pings the controller before the connection.
+
+## From .NET names to Python names
+
+The Python API is the .NET API with Python names. The [.NET documentation](https://underautomation.com/staubli/documentation)
+applies to Python.
+
+| .NET | Python |
+| --- | --- |
+| Method `GetCurrentJointPosition(0)` | `get_current_joint_position(0)` |
+| Property `Soap.User` | `soap.user` |
+| Static method `StaubliController.RegisterLicense(...)` | `StaubliController.register_license(...)` |
+| Enum value `LicenseState.Trial` | `LicenseState.Trial` (an `IntEnum`) |
+| Array `double[]` | list-like object, use `list(...)` to copy it |
+| `Nullable<int>` | `int \| None` |
+
+Each type is in the module named after it, in snake case:
+`UnderAutomation.Staubli.Soap.Data.MotionDesc` is `underautomation.staubli.soap.data.motion_desc.MotionDesc`.
+
+## Features
+
+Everything is reached through `controller.soap`.
+
+### Controller and robots
 
 ```python
-parameters.ping_before_connect = False
-```
-
-![UnderAutomation Staubli communication SDK](https://raw.githubusercontent.com/underautomation/Staubli.NET/refs/heads/main/.github/assets/Connect.jpg)
-
----
-
-### 🔍 Explore System Information
-
-- List robots: `controller.soap.get_robots()`
-- Inspect controller parameters: `controller.soap.get_controller_parameters()`
-- Retrieve DH parameters: `controller.soap.get_dh_parameters(robot=0)`
-- Retrieve joint ranges: `controller.soap.get_joint_range(robot=0)`
-
-```python
-# List robots and display their properties
 robots = controller.soap.get_robots()
-for i, robot in enumerate(robots):
-    print(f"Robot {i}: arm={robot.arm}, kinematic={robot.kinematic}, mount={robot.mount_type}")
+for parameter in controller.soap.get_controller_parameters():
+    print(parameter.name, parameter.value)
 
-# Controller parameters (serial number, firmware, etc.)
-for param in controller.soap.get_controller_parameters():
-    print(f"{param.key}: {param.value}")
-
-# DH parameters for robot 0
-for j, dh in enumerate(controller.soap.get_dh_parameters(0)):
-    print(f"Joint {j}: theta={dh.theta}, d={dh.d}, a={dh.a}, alpha={dh.alpha}")
-
-# Joint ranges for robot 0
+dh = controller.soap.get_dh_parameters(0)
 joint_range = controller.soap.get_joint_range(0)
-for j in range(len(joint_range.min)):
-    print(f"Joint {j}: min={joint_range.min[j]:.2f}, max={joint_range.max[j]:.2f}")
 ```
 
-![UnderAutomation Staubli communication SDK](https://raw.githubusercontent.com/underautomation/Staubli.NET/refs/heads/main/.github/assets/ControllerInfo.jpg)
-
----
-
-### 📍 Track Positions & Joints
-
-- Cartesian pose + joints: `controller.soap.get_current_cartesian_joint_position()`
-- Joint-only feedback: `controller.soap.get_current_joint_position()`
-
-The cartesian position is returned as a `Frame` (a 3×4 homogeneous matrix with columns N, O, A, P).
+### Positions and kinematics
 
 ```python
-# Get joint positions
-joints = controller.soap.get_current_joint_position(robot=0)
-print(f"Joints: {list(joints)}")
+joints = controller.soap.get_current_joint_position(0)
 
-# Get full cartesian + joint position
-cart = controller.soap.get_current_cartesian_joint_position(robot=0)
-print(f"Joints: {list(cart.joints_position)}")
-print(f"Position: X={cart.cartesian_position.x}, Y={cart.cartesian_position.y}, Z={cart.cartesian_position.z}")
-```
+position = controller.soap.get_current_cartesian_joint_position(0)
+print(position.cartesian_position.x, position.cartesian_position.y, position.cartesian_position.z)
 
-![UnderAutomation Staubli communication SDK](https://raw.githubusercontent.com/underautomation/Staubli.NET/refs/heads/main/.github/assets/CurrentPosition.jpg)
-
----
-
-### 🧠 Kinematics Helpers
-
-- Forward kinematics: `controller.soap.forward_kinematics(robot, joints)` → returns a `Frame` position and `Config`
-- Inverse kinematics: `controller.soap.reverse_kinematics(robot, joints, target, config, joint_range)` → returns joint values and a `ReversingResult`
-
-```python
-# Forward kinematics: joints → cartesian
-joints = controller.soap.get_current_joint_position(robot=0)
+# Joints to frame, then frame to joints
 fk = controller.soap.forward_kinematics(0, joints)
-pos = fk.position
-print(f"FK position: px={pos.px}, py={pos.py}, pz={pos.pz}")
-print(f"FK config: {fk.config}")
-
-# Inverse kinematics: cartesian → joints
-joint_range = controller.soap.get_joint_range(robot=0)
 ik = controller.soap.reverse_kinematics(0, joints, fk.position, fk.config, joint_range)
-print(f"IK joints: {list(ik.joint)}")
-print(f"IK result: {ik.result}")  # Success, NoConvergence, etc.
+print(list(ik.joint), ik.result)
 ```
 
-![UnderAutomation Staubli communication SDK](https://raw.githubusercontent.com/underautomation/Staubli.NET/refs/heads/main/.github/assets/Kinematics.jpg)
-
----
-
-### ⚙️ Motion Control Lifecycle
-
-- Power management: `controller.soap.set_power(True/False)`
-- Motion primitives: `move_l`, `move_jc`, `move_jj`, `move_c`
-- Lifecycle control: `stop_motion`, `reset_motion`, `restart_motion`
-
-The `MotionDesc` object controls velocity, acceleration, tool frame, and world frame:
+### Motion
 
 ```python
 from underautomation.staubli.soap.data.motion_desc import MotionDesc
 from underautomation.staubli.soap.data.frame import Frame
 
 mdesc = MotionDesc()
-mdesc.velocity = 100              # Joint velocity (%)
-mdesc.acceleration = 100          # Acceleration (%)
-mdesc.deceleration = 100          # Deceleration (%)
-mdesc.translation_velocity = 250  # Translation velocity (mm/s)
-mdesc.rotation_velocity = 100     # Rotation velocity (deg/s)
-mdesc.frequency = 100             # Interpolation frequency (%)
-mdesc.tool = Frame()              # Tool frame (identity)
-mdesc.frame = Frame()             # World frame (identity)
+mdesc.velocity = 50               # % of the nominal joint speed
+mdesc.acceleration = 100          # %
+mdesc.deceleration = 100          # %
+mdesc.translation_velocity = 250  # mm/s
+mdesc.rotation_velocity = 100     # deg/s
+mdesc.tool = Frame()
+mdesc.frame = Frame()
 
-# Power on, move, power off
 controller.soap.set_power(True)
 
-# Joint move (MoveJJ)
-result = controller.soap.move_jj(0, [0, 0, 0, 0, 0, 0], mdesc)
-print(f"Move result: {result.return_code}")
+result = controller.soap.move_jj(0, [0, 0, 90, 0, 90, 0], mdesc)
+print(result.return_code)
 
-# Linear move (MoveL)
 target = Frame()
 target.px, target.py, target.pz = 300, 0, 450
-result = controller.soap.move_l(0, target, mdesc)
+controller.soap.move_l(0, target, mdesc)
 
+controller.soap.stop_motion()
 controller.soap.set_power(False)
 ```
 
-![UnderAutomation Staubli communication SDK](https://raw.githubusercontent.com/underautomation/Staubli.NET/refs/heads/main/.github/assets/Motion.jpg)
-
----
-
-### 📡 Physical & Logical I/O Management
-
-- Discover I/Os: `controller.soap.get_all_physical_ios()`
-- Read states: `controller.soap.read_ios(["io_name"])`
-- Write outputs: `controller.soap.write_ios(["io_name"], [value])`
+### Inputs / Outputs
 
 ```python
-# List all IOs
 for io in controller.soap.get_all_physical_ios():
-    print(f"{io.name} ({io.type_str}) - {io.description}")
+    print(io.name, io.type_str, io.description)
 
-# Read an IO
 states = controller.soap.read_ios(["BasicDO_1"])
-for s in states:
-    print(f"Value={s.value}, State={s.state}, Locked={s.locked}, Simulated={s.simulated}")
+print(states[0].value, states[0].state)
 
-# Write an IO
 responses = controller.soap.write_ios(["BasicDO_1"], [1.0])
-for r in responses:
-    print(f"Found={r.found}, Success={r.success}")
 ```
 
-![UnderAutomation Staubli communication SDK](https://raw.githubusercontent.com/underautomation/Staubli.NET/refs/heads/main/.github/assets/PhysicalIos.jpg)
-
----
-
-### 📦 Application & Project Control
-
-- Load projects: `controller.soap.load_project("Disk://project/project.pjx")`
-- Start applications: `controller.soap.start_application("project_name")`
-- Inspect VAL3 apps: `controller.soap.get_val_applications()`
-- Stop and unload: `stop_application()`, `stop_and_unload_all()`
+### VAL 3 applications and tasks
 
 ```python
-# List available applications
-for app in controller.soap.get_val_applications():
-    print(f"{app.name} - loaded={app.loaded}, running={app.is_running}")
+controller.soap.load_project("Disk://myProject/myProject.pjx")
+for application in controller.soap.get_val_applications():
+    print(application.name, application.loaded, application.is_running)
 
-# Load and start a project
-controller.soap.load_project("Disk://project/project.pjx")
-controller.soap.start_application("MyProject")
+for task in controller.soap.get_tasks():
+    print(task.name, task.state, task.created_by)
 
-# Stop everything
 controller.soap.stop_and_unload_all()
 ```
 
-![UnderAutomation Staubli communication SDK](https://raw.githubusercontent.com/underautomation/Staubli.NET/refs/heads/main/.github/assets/ValApplications.jpg)
+## Examples
 
----
+The folder [`examples`](examples) contains scripts ready to run. The first run asks the address of the
+controller, the SOAP user, the password and the port, and saves them in `examples/robot_config.json`. It
+also checks the license and asks a key when the trial has ended.
 
-### 🔁 Task Supervision
+| Script | What it does |
+| --- | --- |
+| [`examples/controller/controller_info.py`](examples/controller/controller_info.py) | Controller parameters, robots, DH parameters and joint ranges. |
+| [`examples/motion/motion_move_robot.py`](examples/motion/motion_move_robot.py) | Positions, forward and inverse kinematics, then a joint move to the zero position. |
+| [`examples/io/io_read.py`](examples/io/io_read.py) | Lists the physical I/O, then reads the I/O you choose. |
+| [`examples/io/io_write.py`](examples/io/io_write.py) | Lists the physical I/O, then writes the I/O you choose. |
+| [`examples/applications/applications_load_start.py`](examples/applications/applications_load_start.py) | Lists the VAL 3 applications, loads and starts a project, then suspends, resumes and kills its task. |
 
-- List VAL3 tasks: `controller.soap.get_tasks()`
-- Control execution: `task_suspend`, `task_resume`, `task_kill`
+Run a script from the root of the repository:
 
-```python
-# List all running tasks
-for task in controller.soap.get_tasks():
-    print(f"{task.name}: state={task.state!r}, priority={task.priority}, created_by={task.created_by}")
-
-# Suspend, resume, and kill a task
-controller.soap.task_suspend("project~", "default")
-controller.soap.task_resume("project~", "default")
-controller.soap.task_kill("project~", "default")
+```bash
+python examples/controller/controller_info.py
 ```
 
----
+`examples/motion/motion_move_robot.py` moves the robot. Check the surroundings of the robot first.
 
-### 🔌 Disconnect
+## Compatibility
 
-```python
-controller.disconnect()
-```
+- **Python:** 3.7 to 3.13, with pythonnet 3.0.5.
+- **Operating systems:** Windows (.NET Framework), Linux and macOS (.NET runtime and `export PYTHONNET_RUNTIME=coreclr`).
+- **Controllers:** Staubli CS8 and CS9, and the emulator of Staubli Robotics Suite.
 
----
+## License
 
-## ✅ Compatibility
-
-- **Controllers:** CS8, CS9
-- **Operating Systems:** Windows, Linux, macOS
-- **Python:** 3.7+
-- **Dependency:** pythonnet 3.0+
-
----
-
-## 📜 License
-
-**⚠️ Commercial license required**  
-🔗 [View EULA](https://underautomation.com/staubli/eula)
-
-When you purchase a license, you receive a license key that can be registered at runtime. This allows you to use the SDK without any limitations or trial restrictions.
-
-After cloning the repository, or installing the package, you have an automatic 30-days trial period. After the trial expires, you can obtain a license key from [underautomation.com/license](https://underautomation.com/license?sdk=staubli) and register it in your code to continue using the SDK:
+This SDK needs a commercial license. A 30-day trial starts at the first use, no key needed. After the
+trial, register your key in your code:
 
 ```python
 from underautomation.staubli.staubli_controller import StaubliController
 
-license_info = StaubliController.register_license("Your Company", "XXXX-XXXX")
-print(license_info.is_licensed)
+license_info = StaubliController.register_license("Your Company", "your-license-key")
 print(license_info.state)
 ```
 
----
+- License agreement: [underautomation.com/staubli/eula](https://underautomation.com/staubli/eula) and [License.md](License.md)
+- Trial key: [underautomation.com/license](https://underautomation.com/license?sdk=staubli)
+- Prices and quote: [underautomation.com/staubli](https://underautomation.com/staubli)
 
-## 🤝 Contributing
+## Support
 
-You're welcome to:
-
-- Submit issues & pull requests
-- Share feature suggestions
-- Help improve documentation & samples
-
-👉 [Contribute on GitHub](https://github.com/underautomation/Staubli.py)
-
----
-
-## 📬 Need Help?
-
-- 📚 [Documentation](https://underautomation.com/staubli/documentation)
-- 📩 [Contact Support](https://underautomation.com/contact)
-
----
-
-[⭐ Star the repo if useful](https://github.com/underautomation/Staubli.py/stargazers)  
-[👁️ Watch for updates](https://github.com/underautomation/Staubli.py/watchers)
+- Documentation: [underautomation.com/staubli/documentation](https://underautomation.com/staubli/documentation)
+- Issues: [GitHub Issues](https://github.com/underautomation/Staubli.py/issues)
+- Contact: [underautomation.com/contact](https://underautomation.com/contact)
