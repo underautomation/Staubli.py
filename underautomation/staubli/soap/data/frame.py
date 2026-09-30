@@ -11,12 +11,6 @@ class Frame:
 		else:
 			self._instance = _internal
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def nx(self) -> float:
 		'''X component of the local X-axis vector (Normal X).'''

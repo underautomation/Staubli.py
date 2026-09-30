@@ -1,3 +1,11 @@
-## Minor changes
+## Examples
 
-Allows the 30-day trial period to begin without having to explicitly enter a license key. This request should only be made when requesting an extension of the trial period.
+The examples are now in `examples/<topic>/`: `controller`, `motion`, `io` and `applications`. The first run asks the address of the controller, the SOAP user, the password and the port, and saves them in `examples/robot_config.json`. It also asks a license key when the trial has ended.
+
+```bash
+python examples/controller/controller_info.py
+```
+
+## Package information
+
+The PyPI page links to the release notes and to the issues of `Staubli.py`.

@@ -5,6 +5,21 @@ from underautomation.staubli.soap.internal.soap_client_internal import SoapClien
 from underautomation.staubli.license.license_info import LicenseInfo
 from UnderAutomation.Staubli import StaubliController as staubli_controller
 
+class _StaticProperty:
+	'''Property of the class, readable from the class or from an instance'''
+	def __init__(self, fget, fset=None):
+		self._fget = fget
+		self._fset = fset
+		self.__doc__ = fget.__doc__
+
+	def __get__(self, obj, owner=None):
+		return self._fget()
+
+	def __set__(self, obj, value):
+		if self._fset is None:
+			raise AttributeError("read-only property")
+		self._fset(value)
+
 class StaubliController:
 	'''Main class of the SDK that represents a connection to a Staubli robot controller'''
 	def __init__(self, _internal = 0):
@@ -14,9 +29,11 @@ class StaubliController:
 		else:
 			self._instance = _internal
 
-	def connect(self, parameters: ConnectionParameters) -> None:
-		'''Initialize a conenction to the robot with specified parameters'''
-		self._instance.Connect(parameters._instance if parameters else None)
+	def connect(self, ip_or_parameters: str | ConnectionParameters) -> None:
+		'''Connect to robot by IP with default connection parameters
+		Initialize a conenction to the robot with specified parameters
+		'''
+		self._instance.Connect(getattr(ip_or_parameters, '_instance', ip_or_parameters))
 
 	def disconnect(self) -> None:
 		'''Disconnect all services connected to the robot'''
@@ -47,10 +64,13 @@ class StaubliController:
 		'''Internal SOAP client used to communicate with the robot controller.'''
 		return SoapClientInternal(self._instance.Soap)
 
-	@property
-	def license_info(self) -> LicenseInfo:
+	@staticmethod
+	def _get_license_info() -> LicenseInfo:
 		'''Return information about your license'''
-		return LicenseInfo(None, None, self._instance.LicenseInfo)
+		return LicenseInfo(None, None, staubli_controller.LicenseInfo)
+
+	license_info = _StaticProperty(_get_license_info)
+	del _get_license_info
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

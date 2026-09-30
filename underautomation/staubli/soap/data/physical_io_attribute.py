@@ -13,12 +13,6 @@ class PhysicalIoAttribute:
 		else:
 			self._instance = _internal
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def aio_attribute(self) -> PhysicalAioAttribute:
 		'''Analog I/O specific attributes (null if digital).'''
