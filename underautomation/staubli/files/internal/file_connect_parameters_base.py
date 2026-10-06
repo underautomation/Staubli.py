@@ -1,18 +1,18 @@
 from __future__ import annotations
 import typing
-from UnderAutomation.Staubli.Soap.Internal import SoapConnectParametersBase as soap_connect_parameters_base
+from UnderAutomation.Staubli.Files.Internal import FileConnectParametersBase as file_connect_parameters_base
 
-class SoapConnectParametersBase:
-	'''Base class for SOAP connection parameters'''
+class FileConnectParametersBase:
+	'''Base class for the connection parameters of the file client'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
-			self._instance = soap_connect_parameters_base()
+			self._instance = file_connect_parameters_base()
 		else:
 			self._instance = _internal
 
 	@property
 	def user(self) -> str:
-		'''Username for the SOAP service (default: default)'''
+		'''User of the FTP server of the controller (default: default). Not used with a controller emulated by Staubli Robotics Suite.'''
 		return self._instance.User
 
 	@user.setter
@@ -21,7 +21,7 @@ class SoapConnectParametersBase:
 
 	@property
 	def password(self) -> str:
-		'''Password for the SOAP service (default: default)'''
+		'''Password of the user (default: default). Not used with a controller emulated by Staubli Robotics Suite.'''
 		return self._instance.Password
 
 	@password.setter
@@ -30,12 +30,21 @@ class SoapConnectParametersBase:
 
 	@property
 	def port(self) -> int:
-		'''Port of the SOAP service. Default: 0 (automatic). With 0, the SDK uses 851 for a real controller, and the SOAP port of the network configuration of a controller emulated by Staubli Robotics Suite (851 when it is not found).'''
+		'''Port of the FTP server of the controller (default: 21)'''
 		return self._instance.Port
 
 	@port.setter
 	def port(self, value: int):
 		self._instance.Port = value
+
+	@property
+	def timeout_ms(self) -> int:
+		'''Timeout of the FTP connection and of the transfers, in milliseconds (default: 30000)'''
+		return self._instance.TimeoutMs
+
+	@timeout_ms.setter
+	def timeout_ms(self, value: int):
+		self._instance.TimeoutMs = value
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
@@ -44,7 +53,7 @@ class SoapConnectParametersBase:
 		return self.__str__()
 
 	def __eq__(self, other) -> bool:
-		if not isinstance(other, SoapConnectParametersBase):
+		if not isinstance(other, FileConnectParametersBase):
 			NotImplemented
 		return self._instance.Equals(other._instance)
 

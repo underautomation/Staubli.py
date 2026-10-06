@@ -34,5 +34,5 @@ class SoapConnectParameters(SoapConnectParametersBase):
 	def __hash__(self) -> int:
 		return self._instance.GetHashCode() if self._instance is not None else 0
 
-# Default port for SOAP service
+# Default port of the SOAP server of a real controller (851), used when Port is 0
 SoapConnectParameters.DEFAULT_PORT = soap_connect_parameters.DEFAULT_PORT

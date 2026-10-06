@@ -2,6 +2,7 @@ from __future__ import annotations
 import typing
 from underautomation.staubli.connection_parameters import ConnectionParameters
 from underautomation.staubli.soap.internal.soap_client_internal import SoapClientInternal
+from underautomation.staubli.files.internal.file_client_internal import FileClientInternal
 from underautomation.staubli.license.license_info import LicenseInfo
 from UnderAutomation.Staubli import StaubliController as staubli_controller
 
@@ -51,7 +52,7 @@ class StaubliController:
 
 	@property
 	def address(self) -> str:
-		'''IP or robot name'''
+		'''IP or robot name, or path of the .controller file of a controller emulated by Staubli Robotics Suite'''
 		return self._instance.Address
 
 	@property
@@ -63,6 +64,11 @@ class StaubliController:
 	def soap(self) -> SoapClientInternal:
 		'''Internal SOAP client used to communicate with the robot controller.'''
 		return SoapClientInternal(self._instance.Soap)
+
+	@property
+	def file(self) -> FileClientInternal:
+		'''File client: upload, download, listing and management of the files of the controller. Uses the FTP server of a real controller, or the folder of the .controller file of a controller emulated by Staubli Robotics Suite. The VAL 3 applications are in the folder "/usr/usrapp": robot.File.UploadApplicationToController(...) sends a complete application.'''
+		return FileClientInternal(self._instance.File)
 
 	@staticmethod
 	def _get_license_info() -> LicenseInfo:

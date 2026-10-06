@@ -15,10 +15,10 @@ class SoapClient(SoapClientBase):
 	def connect(self, ip: str, user: str, password: str, port: int) -> None:
 		'''Connect to a robot
 
-		:param ip: IP or network name of the robot
+		:param ip: IP or network name of the robot. For a controller emulated by Staubli Robotics Suite, path of the .controller file of the controller in the cell (UNC path when the emulation runs on another computer).
 		:param user: Username for the SOAP service
 		:param password: Password for the SOAP service
-		:param port: Port of the SOAP service
+		:param port: Port of the SOAP service. 0 (automatic): 851 for a real controller, port of the network configuration of an emulated controller.
 		'''
 		self._instance.Connect(ip, user, password, port)
 

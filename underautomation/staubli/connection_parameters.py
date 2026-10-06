@@ -1,6 +1,7 @@
 from __future__ import annotations
 import typing
 from underautomation.staubli.common.soap_connect_parameters import SoapConnectParameters
+from underautomation.staubli.common.file_connect_parameters import FileConnectParameters
 from UnderAutomation.Staubli import ConnectionParameters as connection_parameters
 
 class ConnectionParameters:
@@ -14,7 +15,7 @@ class ConnectionParameters:
 
 	@property
 	def address(self) -> str:
-		'''Address of the robot (IP or host name)'''
+		'''Address of the robot: IP or host name of a real controller. For a controller emulated by Staubli Robotics Suite, path of the .controller file of the controller in the cell (for example C:\\...\\MyCell\\Controller1\\Controller1.controller): the SOAP client then connects to the local computer, and the file client uses the folder of this file. Give a UNC path when the emulation runs on another computer: the SOAP client then connects to this computer. A path that is not a .controller file is refused.'''
 		return self._instance.Address
 
 	@address.setter
@@ -38,6 +39,15 @@ class ConnectionParameters:
 	@soap.setter
 	def soap(self, value: SoapConnectParameters):
 		self._instance.Soap = value._instance if value else None
+
+	@property
+	def file(self) -> FileConnectParameters:
+		'''File client connection parameters (upload, download, listing and management of the files of the controller)'''
+		return FileConnectParameters(self._instance.File)
+
+	@file.setter
+	def file(self, value: FileConnectParameters):
+		self._instance.File = value._instance if value else None
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
