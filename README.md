@@ -11,7 +11,8 @@ controllers through the **SOAP server** of the controller. Nothing is installed 
 other Staubli software is needed on the PC.
 
 Use it to read the robots and the controller parameters, read positions, compute the kinematics, move the
-robot, read and write I/O, and manage VAL 3 applications and tasks, from a Python script.
+robot, read and write I/O, manage VAL 3 applications and tasks, and transfer the files of the controller,
+from a Python script.
 
 - Product page: [underautomation.com/staubli](https://underautomation.com/staubli)
 - Documentation: [underautomation.com/staubli/documentation/get-started-python](https://underautomation.com/staubli/documentation/get-started-python)
@@ -73,7 +74,7 @@ from underautomation.staubli.connection_parameters import ConnectionParameters
 parameters = ConnectionParameters("192.168.0.254")
 parameters.soap.user = "default"      # user of the controller
 parameters.soap.password = "default"
-parameters.soap.port = 851            # default SOAP port
+parameters.soap.port = 0              # 0 (default): automatic, 851 on a real controller
 
 controller = StaubliController()
 controller.connect(parameters)
@@ -85,6 +86,11 @@ controller.disconnect()
 ```
 
 `parameters.ping_before_connect` (True by default) pings the controller before the connection.
+
+To connect to a controller emulated by Staubli Robotics Suite, give the path of its `.controller` file as
+address (for example `C:\...\MyCell\Controller1\Controller1.controller`, or a UNC path when the emulator
+runs on another PC). With the SOAP port 0, the SDK reads the SOAP port of the emulated controller in its
+configuration (`usr\configs\network.cfx`), and uses 851 when it is not found.
 
 ## From .NET names to Python names
 
@@ -105,7 +111,7 @@ Each type is in the module named after it, in snake case:
 
 ## Features
 
-Everything is reached through `controller.soap`.
+Everything is reached through `controller.soap`, except the files: `controller.file`.
 
 ### Controller and robots
 
@@ -146,6 +152,7 @@ mdesc.translation_velocity = 250  # mm/s
 mdesc.rotation_velocity = 100     # deg/s
 mdesc.tool = Frame()
 mdesc.frame = Frame()
+mdesc.frequency = 100             # interpolation frequency in %, 0 is refused by the controller
 
 controller.soap.set_power(True)
 
@@ -185,6 +192,41 @@ for task in controller.soap.get_tasks():
 controller.soap.stop_and_unload_all()
 ```
 
+### Files
+
+The file client is disabled by default. On a real controller, it uses the FTP server of the controller
+(port 21, user and password of the FTP server). The emulator of Staubli Robotics Suite has no FTP server:
+give the path of the `.controller` file of the emulated controller as address (a UNC path when the emulator
+runs on another PC). The files are read and written in the folder of this file, which has the same tree as
+the FTP server of a real controller. The paths are the same in both cases. The VAL 3 applications are in `/usr/usrapp`, one sub-folder per
+application: `/usr/usrapp/myApp/myApp.pjx` is the project `Disk://myApp/myApp.pjx`.
+
+```python
+from underautomation.staubli.staubli_controller import StaubliController
+from underautomation.staubli.connection_parameters import ConnectionParameters
+
+parameters = ConnectionParameters("192.168.0.254")  # or r"C:\SRS\MyCell\Controller1\Controller1.controller"
+parameters.file.enable = True
+parameters.file.user = "default"
+parameters.file.password = "default"
+
+controller = StaubliController()
+controller.connect(parameters)
+
+for item in controller.file.get_listing("/usr/usrapp"):
+    print(item.full_name, item.type, item.size)
+
+controller.file.upload_file_to_controller(r"C:\Data\points.dat", "/usr/usrapp/myApp/points.dat")
+content = controller.file.download_bytes_from_controller("/usr/usrapp/myApp/myApp.pjx")
+
+# Send a complete application: C:\MyApps\myApp is copied to /usr/usrapp/myApp
+controller.soap.stop_and_unload_all()
+controller.file.upload_application_to_controller(r"C:\MyApps\myApp")
+controller.soap.load_project("Disk://myApp/myApp.pjx")
+
+controller.disconnect()
+```
+
 ## Examples
 
 The folder [`examples`](examples) contains scripts ready to run. The first run asks the address of the
@@ -198,6 +240,13 @@ also checks the license and asks a key when the trial has ended.
 | [`examples/io/io_read.py`](examples/io/io_read.py) | Lists the physical I/O, then reads the I/O you choose. |
 | [`examples/io/io_write.py`](examples/io/io_write.py) | Lists the physical I/O, then writes the I/O you choose. |
 | [`examples/applications/applications_load_start.py`](examples/applications/applications_load_start.py) | Lists the VAL 3 applications, loads and starts a project, then suspends, resumes and kills its task. |
+| [`examples/files/files_explorer.py`](examples/files/files_explorer.py) | Console explorer of the files of the controller: list, open folders, download, upload, create, rename, delete. |
+| [`examples/files/files_upload_application.py`](examples/files/files_upload_application.py) | Sends the folder of a VAL 3 application to `/usr/usrapp`, then loads and starts the project. |
+| [`examples/files/files_backup_applications.py`](examples/files/files_backup_applications.py) | Downloads all the VAL 3 applications of `/usr/usrapp` to a folder of the PC. |
+
+The `files` examples also ask the user and the password of the FTP server of the controller. For the
+emulator of Staubli Robotics Suite, give the path of the `.controller` file of the emulated controller as
+address: the files are then read and written in the folder of this file.
 
 Run a script from the root of the repository:
 

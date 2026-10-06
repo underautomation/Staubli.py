@@ -73,10 +73,15 @@ def _get_setting(key, prompt, default=None, hide_default=False):
 # ==============================================================================
 def get_robot_ip():
     """
-    Address of the controller (IP or host name).
-    The emulator of Staubli Robotics Suite usually answers on 127.0.0.1.
+    Address of the controller: IP or host name of a real controller.
+    For a controller emulated by Staubli Robotics Suite, path of its .controller file, for example
+    C:\\...\\MyCell\\Controller1\\Controller1.controller (UNC path when SRS runs on another PC).
     """
-    return _get_setting("robot_ip", "Controller IP address or host name", default="127.0.0.1")
+    return _get_setting("robot_ip", "Controller IP address, host name, or .controller file of a SRS emulated controller", default="127.0.0.1")
+
+def is_controller_file(address):
+    """True when the address is the .controller file of an emulated controller, False for an IP or a host name."""
+    return address.lower().endswith(".controller")
 
 def get_soap_user():
     """User of the SOAP server of the controller."""
@@ -87,12 +92,23 @@ def get_soap_password():
     return _get_setting("soap_password", "SOAP password", default="default", hide_default=True)
 
 def get_soap_port():
-    """Port of the SOAP server of the controller, 851 by default."""
-    raw = _get_setting("soap_port", "SOAP port", default="851")
+    """
+    Port of the SOAP server of the controller. 0 (default) is automatic: 851 for a real controller,
+    the SOAP port of the configuration of an emulated controller.
+    """
+    raw = _get_setting("soap_port", "SOAP port (0: automatic)", default="0")
     try:
         return int(str(raw).strip())
     except ValueError:
-        return 851
+        return 0
+
+def get_file_user():
+    """User of the FTP server of the controller."""
+    return _get_setting("file_user", "FTP user", default="default")
+
+def get_file_password():
+    """Password of the FTP server of the controller."""
+    return _get_setting("file_password", "FTP password", default="default", hide_default=True)
 
 # ==============================================================================
 # License
@@ -154,9 +170,14 @@ def setup_license():
 # ==============================================================================
 # Connection
 # ==============================================================================
-def connect_robot():
+def connect_robot(files=False):
     """
     Ask the settings of the controller, check the license and connect.
+
+    Args:
+        files: also connect the file client (controller.file). With a real controller, it uses the FTP
+            server of the controller and asks its user and password. With the .controller file of a
+            controller emulated by Staubli Robotics Suite as address, it uses the folder of this file.
 
     Returns:
         StaubliController: a connected controller
@@ -171,9 +192,19 @@ def connect_robot():
     parameters.soap.password = get_soap_password()
     parameters.soap.port = get_soap_port()
 
+    if files:
+        parameters.file.enable = True
+        if not is_controller_file(parameters.address):
+            parameters.file.user = get_file_user()
+            parameters.file.password = get_file_password()
+
     controller = StaubliController()
     controller.connect(parameters)
-    print(f"Connected to {parameters.address}.\n")
+    print(f"Connected to {parameters.address}.")
+    if files:
+        mode = f"folder of {controller.file.controller_file}" if controller.file.is_simulated else "FTP server of the controller"
+        print(f"Files: {mode}.")
+    print()
     return controller
 
 def print_title(title):
